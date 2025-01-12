@@ -34,7 +34,7 @@ local ActiveTabs = {
 
 local TabMain = ActiveTabs.Main
 
-TabMain:Seperator({
+TabMain:Separator({
     Text = "Rogue Lineage";
 })
 
@@ -42,6 +42,6 @@ TabMain:Seperator({
 
 local TabPlayer = ActiveTabs.Player
 
-TabPlayer:Seperator({
+TabPlayer:Separator({
     Text = "Player";
 })
