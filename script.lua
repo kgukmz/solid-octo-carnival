@@ -40,6 +40,36 @@ local ActiveTabs = {
     });
 }
 
+local function DebugConsoleLog(...)
+    getgenv().DebugConsole:AppendText(`<font color="rgb(240, 40, 10)">[DEBUG]</font>`, table.unpack({...}))
+end
+
+local function ModalNotification(Title, Text)
+    local ModalWindow = ImGui:CreateModal({
+	    Title = Title,
+	    AutoSize = "Y"
+    })
+
+    ModalWindow:Label({
+	    Text = Text
+    })
+
+    ModalWindow:Separator()
+
+    ModalWindow:Button({
+	    Text = "CONTINUE",
+	    Callback = function()
+		    ModalWindow:Close()
+	    end,
+    })
+end
+
+task.defer(function()
+    game:GetService("ScriptContext").Error:Connect(function(Message)
+        DebugConsoleLog("| SCRIPT ERROR |" , Message)
+    end)
+end)
+
 -- // Rogue Lineage 
 
 local TabMain = ActiveTabs.Main
@@ -54,6 +84,7 @@ local function Reset()
     local Head = Player.Character:FindFirstChild("Head")
 
     if (Head == nil) then
+        DebugConsoleLog("Character's head is non-existant")
         return
     end
 
@@ -62,12 +93,14 @@ end
 
 local function Kill()
     if (getgenv().ScriptData.KillMethod == nil) then
+        ModalNotification("Error", "Please select a kill method")
         return
     end
 
     if (getgenv().ScriptData.KillMethod == "Solans") then
         if (getgenv().firetouchinterest == nil) then
-            warn("Executor does not support this feature.")
+            ModalNotification("Error", "Executor does not support this feature")
+            DebugConsoleLog("firetouchinterest is nil", identifyexecutor())
             return
         end
 
@@ -83,6 +116,7 @@ local function Kill()
         end
 
         if (SolansSword == nil) then
+            ModalNotification("Error", "Solans has already been pulled :(")
             return
         end
 
@@ -118,6 +152,25 @@ TabPlayer:Combo({
     end;
 })
 
+-- // Debug
+
+local TabDebug = ActiveTabs.Debug
+
+TabDebug:Separator({
+    Text = "DEBUG";
+})
+
+getgenv().DebugConsole = TabDebug:Console({
+    Text = "-- [DEBUG] //",
+	ReadOnly = true,
+	Border = false,
+	Fill = true,
+	RichText = true,
+	Enabled = true, 
+	AutoScroll = true,
+	MaxLines = math.huge
+})
+
 -- // Misc
 
 local function ClientAntiBan()
@@ -126,7 +179,6 @@ local function ClientAntiBan()
             continue
         end
 
-        RunService:SetThrottleEnabled("RenderStepped", false)
         Player:Kick("Kicked in order to prevent anti-cheat ban")
     end
 end
