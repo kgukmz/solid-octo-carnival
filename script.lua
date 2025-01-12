@@ -1,3 +1,4 @@
+local ContextActionService = game:GetService("ContextActionService")
 local SourceURL = 'https://github.com/depthso/Roblox-ImGUI/raw/main/ImGui.lua'
 local ImGui = loadstring(game:HttpGet(SourceURL))()
 
@@ -28,3 +29,19 @@ local ActiveTabs = {
         Visible = true;
     });
 }
+
+-- // Rogue Lineage 
+
+local TabMain = ActiveTabs.Main
+
+TabMain:Seperator({
+    Text = "Rogue Lineage";
+})
+
+-- // Player
+
+local TabPlayer = ActiveTabs.Player
+
+TabPlayer:Seperator({
+    Text = "Player";
+})
