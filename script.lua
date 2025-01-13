@@ -41,7 +41,7 @@ local ActiveTabs = {
 }
 
 local function DebugConsoleLog(...)
-    getgenv().DebugConsole:AppendText(`<font color="rgb(240, 40, 10)">[DEBUG]</font>`, table.unpack({...}))
+    getgenv().DebugConsole:AppendText(`<font color="rgb(240, 40, 10)">[DEBUG]:</font>`, table.unpack({...}))
 end
 
 local function ModalNotification(Title, Text)
