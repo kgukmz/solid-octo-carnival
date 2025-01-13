@@ -12,8 +12,8 @@ local function DirectoryRequire(Path)
 		return game:HttpGet(JapanU20Match)
 	end)
 
-	if (Success == false) then
-		warn("Error:", Response)
+	if (string.match(Response, "404")) then
+		warn("404 Error")
 		return nil
 	end
 
