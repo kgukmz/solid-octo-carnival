@@ -2,6 +2,7 @@ local Players = cloneref(game:GetService("Players"))
 local RunService = cloneref(game:GetService("RunService"))
 local CollectionService = cloneref(game:GetService("CollectionService"))
 local Lighting = cloneref(game:GetService("Lighting"))
+local UserInputService = cloneref(game:GetService("UserInputService"))
 
 local SourceURL = 'https://github.com/depthso/Roblox-ImGUI/raw/main/ImGui.lua'
 local ImGui = loadstring(game:HttpGet(SourceURL))()
@@ -11,9 +12,16 @@ local Character = Player.Character
 local Humanoid = Character.Humanoid
 
 local IdentifyExecutor = identifyexecutor()
+-- // local _G = cloneref(getgenv()._G)
+
+local PlayerTable = {}
 
 getgenv().ScriptData = {
-    KillMethod = nil
+    Player = {
+        InfiniteJump = false;
+        KillMethod = nil;
+    };
+    SelectedCharacterView = nil;
 }
 
 local Window = ImGui:CreateWindow({
@@ -49,6 +57,24 @@ local function DebugConsoleLog(...)
     getgenv().DebugConsole:AppendText(`<font color="rgb(240, 40, 10)">[DEBUG]:</font>`, table.unpack({...}))
 end
 
+local function PlayerAdded(Plr)
+    if (PlayerTable[Plr] ~= nil) then
+        return
+    end
+
+    PlayerTable[Plr] = Plr
+    DebugConsoleLog("Addded Player:", Plr)
+end
+
+local function PlayerRemoving(Plr)
+    if (PlayerTable[Plr] == nil) then
+        return
+    end
+
+    PlayerTable[Plr] = nil
+    DebugConsoleLog("Removed player:", Plr)
+end
+
 local function ModalNotification(Title, Text)
     local ModalWindow = ImGui:CreateModal({
 	    Title = Title,
@@ -73,6 +99,13 @@ task.defer(function()
     game:GetService("ScriptContext").Error:Connect(function(Message)
         DebugConsoleLog("| SCRIPT ERROR |" , Message)
     end)
+
+    Players.PlayerAdded:Connect(PlayerAdded)
+    Players.PlayerRemoving:Connect(PlayerRemoving)
+
+    for _, Plr in next, Players:GetPlayers() do
+        PlayerAdded(Plr)
+    end
 end)
 
 -- // Rogue Lineage 
@@ -82,6 +115,29 @@ local TabMain = ActiveTabs.Main
 TabMain:Separator({
     Text = "ROGUE LINEAGE";
 })
+
+local CharacterViewHeader = TabMain:CollapsingHeader({
+	Title = "Character View"
+})
+
+local CharacterViewport = CharacterViewHeader:Viewport({
+	Size = UDim2.fromOffset(350, 150),
+    Clone = true,
+    Model = nil,
+    Border = true,
+})
+
+local Rig = nil
+
+CharacterViewHeader:Combo({
+    Placeholder = "...";
+    Label = "Players";
+    Items = PlayerTable;
+    Callback = function(self, Value)
+       Rig = CharacterViewport:SetModel(Value, CFrame.new(0, -2.5, -5))
+    end
+})
+
 
 -- // Player
 
@@ -97,12 +153,12 @@ local function Reset()
 end
 
 local function Kill()
-    if (getgenv().ScriptData.KillMethod == nil) then
+    if (getgenv().ScriptData.Player.KillMethod == nil) then
         ModalNotification("Error", "Please select a kill method")
         return
     end
 
-    if (getgenv().ScriptData.KillMethod == "Solans") then
+    if (getgenv().ScriptData.Player.KillMethod == "Solans") then
         if (getgenv().firetouchinterest == nil) then
             ModalNotification("Error", "Executor does not support this feature")
             DebugConsoleLog("firetouchinterest is nil", identifyexecutor())
@@ -126,17 +182,6 @@ local function Kill()
         end
 
         firetouchinterest(SolansSword, Player.Character.Torso, true)
-    end
-end
-
-local Injuries = {}
-local RealInjuries = {}
-
-local function NoInjuries(_, Value)
-    if (Value == true) then
-        
-    else
-        
     end
 end
 
@@ -164,13 +209,19 @@ TabPlayer:Combo({
         "Solans"
     };
     Callback = function(self, Value)
-        getgenv().ScriptData.KillMethod = Value
+        getgenv().ScriptData.Player.KillMethod = Value
     end;
 })
 
 TabPlayer:Checkbox({
     Label = "No Injuries";
-    Callback = NoInjuries
+})
+
+TabPlayer:Checkbox({
+    Label = "Infinite Jump";
+    Callback = function(self, Value)
+        getgenv().ScriptData.Player.InfiniteJump = Value
+    end
 })
 
 -- // Debug
@@ -202,7 +253,21 @@ local function ClientAntiBan()
     end
 end
 
+local function RunServiceChecks()
+    if (UserInputService:IsKeyDown(Enum.KeyCode.Space)) then
+        if (getgenv().ScriptData.Player.InfiniteJump == false) then
+            return
+        end
+        if (Player.Character.Humanoid == nil) then
+            return
+        end
+
+        Player.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+    end
+end
+
 RunService:BindToRenderStep("AntiBan", 1, ClientAntiBan)
+RunService:BindToRenderStep("RunServiceChecks", 1, RunServiceChecks)
 
 PlayerRow:Fill()
 Window:ShowTab(TabMain)
