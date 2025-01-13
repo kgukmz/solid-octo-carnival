@@ -6,7 +6,18 @@ local function DirectoryRequire(Path)
 	end
 
 	local ParentDirectory = "https://raw.githubusercontent.com/kgukmz/solid-octo-carnival/main/"
-	local JapanU20Match = ParentDirectory 
+	local JapanU20Match = ParentDirectory .. Path
+
+	local Success, Response = pcall(function()
+		return game:HttpGet(JapanU20Match)
+	end)
+
+	if (Success == false) then
+		warn("Error:", Response)
+		return nil
+	end
+
+	return Response 
 end
 
 getgenv().require = DirectoryRequire
