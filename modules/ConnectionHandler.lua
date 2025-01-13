@@ -3,13 +3,15 @@ local ConnectionHandler = {
 }
 
 function ConnectionHandler:Connect(Flag, Callback)
-    local NewConnection = self.Connections[Flag] = Callback
+    local NewConnection = self.Connections[Flag]
+    NewConnection = Callback()
+
     return NewConnection
 end
 
 function ConnectionHandler:Disconnect(Flag)
     if (self.Connections[Flag] == nil) then
-        continue
+        return
     end
 
     self.Connections[Flag]:Disconnect()
