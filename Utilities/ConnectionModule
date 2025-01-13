@@ -1,0 +1,6 @@
+local ConnectionModule = {
+    Connections = {}
+}
+
+
+return ConnectionModule
