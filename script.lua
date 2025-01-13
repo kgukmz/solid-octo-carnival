@@ -373,6 +373,10 @@ end
 
 
 local function ClientAntiBan()
+    if (Player.Character == nil) then
+        return
+    end
+    
     for i, v : AnimationTrack in next, Humanoid:GetPlayingAnimationTracks() do
         if (string.match(v.Animation.AnimationId, "4595066903") == nil) then
             continue
@@ -383,6 +387,10 @@ local function ClientAntiBan()
 end
 
 local function RunServiceChecks()
+    if (Player.Character == nil) then
+        return
+    end
+
     if (UserInputService:IsKeyDown(Enum.KeyCode.Space)) then
         if (getgenv().ScriptData.Player.InfiniteJump == false) then
             return
