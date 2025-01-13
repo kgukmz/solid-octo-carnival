@@ -17,7 +17,7 @@ local function DirectoryRequire(Path)
 		return nil
 	end
 
-	return Response 
+	return loadstring(Response)()
 end
 
 getgenv().require = DirectoryRequire
