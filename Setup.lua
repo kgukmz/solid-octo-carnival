@@ -22,4 +22,4 @@ end
 
 getgenv().require = DirectoryRequire
 
-DirectoryRequire("Loader.lua")
+DirectoryRequire("loader.lua")
