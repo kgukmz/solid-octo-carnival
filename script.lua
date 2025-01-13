@@ -1,5 +1,7 @@
-local Players = game:GetService("Players")
-local RunService = game:GetService("RunService")
+local Players = cloneref(game:GetService("Players"))
+local RunService = cloneref(game:GetService("RunService"))
+local CollectionService = cloneref(game:GetService("CollectionService"))
+local Lighting = cloneref(game:GetService("Lighting"))
 
 local SourceURL = 'https://github.com/depthso/Roblox-ImGUI/raw/main/ImGui.lua'
 local ImGui = loadstring(game:HttpGet(SourceURL))()
@@ -8,14 +10,17 @@ local Player = Players.LocalPlayer
 local Character = Player.Character
 local Humanoid = Character.Humanoid
 
+local IdentifyExecutor = identifyexecutor()
+
 getgenv().ScriptData = {
     KillMethod = nil
 }
 
 local Window = ImGui:CreateWindow({
-	Title = "Window",
+	Title = "Window" .. " | " .. IdentifyExecutor,
 	Size = UDim2.fromOffset(400, 250),
 	Position = UDim2.new(0.5, 0, 0, 70),
+    NoResize = true,
 })
 
 local ActiveTabs = {
@@ -124,6 +129,17 @@ local function Kill()
     end
 end
 
+local Injuries = {}
+local RealInjuries = {}
+
+local function NoInjuries(_, Value)
+    if (Value == true) then
+        
+    else
+        
+    end
+end
+
 local TabPlayer = ActiveTabs.Player
 local PlayerRow = ActiveTabs.Player:Row()
 
@@ -152,6 +168,11 @@ TabPlayer:Combo({
     end;
 })
 
+TabPlayer:Checkbox({
+    Label = "No Injuries";
+    Callback = NoInjuries
+})
+
 -- // Debug
 
 local TabDebug = ActiveTabs.Debug
@@ -170,8 +191,6 @@ getgenv().DebugConsole = TabDebug:Console({
 	AutoScroll = true,
 	MaxLines = math.huge
 })
-
--- // Misc
 
 local function ClientAntiBan()
     for i, v : AnimationTrack in next, Humanoid:GetPlayingAnimationTracks() do
