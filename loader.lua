@@ -6,7 +6,7 @@ xpcall(function()
 	print("v")
 	
 	getgenv().Library = require("modules/ImGui.lua")
-	
+	--[[
 	local Services = require("modules/GetServices.lua")
 	local GamesList = require("SupportedGames.json")
 	
@@ -18,6 +18,7 @@ xpcall(function()
 	if (not GameScript) then
 		warn("no game script")
 	end
+	--]]
 end, function(Error)
 	warn(Error)
 end)
