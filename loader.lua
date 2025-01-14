@@ -1,19 +1,18 @@
-xpcall(function()
-	if (getgenv().AlchemyLoaded == true) then
-		return
-	end
+if (getgenv().AlchemyLoaded == true) then
+	return
+end
 
-	getgenv().Library = require("modules/ImGui.lua")
-	local Services = require("modules/GetServices.lua")
-	local GamesList = require("SupportedGames.json")
-	
-	local HttpService = Services:Get("HttpService")
-	local SupportedGames = HttpService:JSONEncode(GamesList)
-	
-	local GameName = SupportedGames[game.PlaceId]
-	print(GameName)
+local Games = {
+	[5208655184] = "RogueLineage"
+}
 
-	print("No")
-end, function(Error)
-	warn(Error)
-end)
+local Library = require("modules/ImGui.lua")
+local Services = require("modules/GetServices.lua")
+
+local A = Games[game.PlaceId]
+
+if (A ~= nil) then
+	local GameScriptPath = string.format("games/%s/main.lua", A)
+	
+	require(GameScriptPath)
+end
