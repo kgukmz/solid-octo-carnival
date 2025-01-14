@@ -18,6 +18,6 @@ xpcall(function()
 	if (not GameScript) then
 		warn("no game script")
 	end
-end, function(...)
-	table.foreach({...}, warn)
+end, function(Error)
+	warn(Error)
 end)
