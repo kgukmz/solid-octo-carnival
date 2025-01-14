@@ -20,6 +20,8 @@ local function DirectoryRequire(Path)
 		return nil
 	end
 
+	print(Request.Success)
+
 	return loadstring(Request.Body)()
 end
 
