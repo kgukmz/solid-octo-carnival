@@ -23,9 +23,3 @@ function GetService:Get(...)
 
     return table.unpack(Services)
 end
-
-<<<<<<< HEAD
-return GetService
-=======
-return GetService
->>>>>>> bdbfed9e2c3e54a3f4d5865985a51d88418b871c

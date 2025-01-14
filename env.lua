@@ -17,6 +17,10 @@ local function DirectoryRequire(Path)
 		return nil
 	end
 
+	if (typeof(Response) == "table") then
+		
+	end
+
 	return loadstring(Response)()
 end
 
