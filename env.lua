@@ -16,12 +16,10 @@ local function DirectoryRequire(Path)
 		})
 	end)
 
-	if (Request and Request.Body == nil) then
+	if (Success == false) then
+		warn("Error:", Request)
 		return nil
 	end
-
-	print("Ok")
-	print(Request.Success)
 
 	return loadstring(Request.Body)()
 end
