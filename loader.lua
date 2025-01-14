@@ -16,3 +16,5 @@ if (A ~= nil) then
 	
 	require(GameScriptPath)
 end
+
+print("succulent-cess")
