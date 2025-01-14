@@ -10,13 +10,50 @@ local Games = {
 local Library = require("modules/ImGui.lua")
 local Services = require("modules/GetServices.lua")
 
-local A = Games[game.PlaceId]
-print(A, game.PlaceId, Games[game.PlaceId])
+local SelectedGame = Games[game.PlaceId]
+print(SelectedGame, game.PlaceId, Games[game.PlaceId])
 
-if (A ~= nil) then
-	local GameScriptPath = string.format("games/%s/main.lua", A)
-	
-	require(GameScriptPath)
+if (SelectedGame == nil) then
+	return
 end
 
-print("succulent-cess")
+local UIWindow = Library:CreateWindow({
+	Title = "Alchemy | " .. identifyexecutor(),
+	Size = UDim2.fromOffset(400, 250),
+	Position = UDim2.new(0.5, 0, 0, 70),
+	NoResize = true,
+})
+
+if (getgenv().DebugMode == true) then
+	local DebugWindow = Library:CreateWindow({
+		Title = "Alchemy: Debug | " .. identifyexecutor(),
+		Size = UDim2.fromOffset(300, 300),
+		Position = UDim2.new(0.5, 0, 0, 70),
+	}):CreateTab({
+		Name = "Main";
+        Visible = true;
+	})
+
+	local DebugConsole = DebugWindow:Console({
+		Text = "[DEBUG]";
+		ReadOnly = true;
+		Border = false;
+		Fill = true;
+		RichText = true;
+		Enabled = true;
+		AutoScroll = true;
+		MaxLines = math.huge;
+	})
+
+	local function DebugConsoleLog(...)
+		DebugConsole:AppendText(`<font color="rgb(240, 40, 10)">[DEBUG]:</font>`, table.unpack({...}))
+	end
+
+	getgenv().DebugConsoleLog = DebugConsoleLog
+end
+
+getgenv().ImGui_Window = UIWindow
+
+local GameScriptPath = string.format("games/%s/main.lua", SelectedGame)
+require(GameScriptPath)
+
