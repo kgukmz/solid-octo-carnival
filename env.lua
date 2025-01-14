@@ -2,26 +2,25 @@ local OldRequire = require
 
 local function DirectoryRequire(Path)
 	if (type(Path) ~= "string") then
-		return OldRequire(Path)
+		local ModuleScript = OldRequire(Path)
+		return ModuleScript
 	end
 
-	local ParentDirectory = "https://raw.githubusercontent.com/kgukmz/solid-octo-carnival/main/"
-	local JapanU20Match = ParentDirectory .. Path
+	local MainDirectory = "https://raw.githubusercontent.com/kgukmz/solid-octo-carnival/refs/heads/main/"
+	local RequestedFile = (MainDirectory .. Path)
 
-	warn(JapanU20Match)
-
-	local Success, Response = pcall(function()
-		return game:HttpGet(JapanU20Match)
+	local Success, Request = pcall(function()
+		return http_request({
+			Url = RequestedFile;
+			Method = "GET";
+		})
 	end)
 
-	print(Success)
-
-	if (string.match(Response, "404")) then
-		warn("404 Error")
+	if (Request and Request.Body == nil) then
 		return nil
 	end
 
-	return loadstring(Response)()
+	return loadstring(Request.Body)()
 end
 
 getgenv().require = DirectoryRequire
