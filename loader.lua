@@ -11,6 +11,7 @@ local Library = require("modules/ImGui.lua")
 local Services = require("modules/GetServices.lua")
 
 local A = Games[game.PlaceId]
+print(A, game.PlaceId, Games[game.PlaceId])
 
 if (A ~= nil) then
 	local GameScriptPath = string.format("games/%s/main.lua", A)
