@@ -16,11 +16,7 @@ local function DirectoryRequire(Path)
 		warn("404 Error")
 		return nil
 	end
-
-	if (typeof(Response) == "table") then
-		
-	end
-
+	
 	return loadstring(Response)()
 end
 

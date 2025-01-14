@@ -1,11 +1,17 @@
-local ImGui = require("modules/ImGui.lua")
-local Window = ImGui:CreateWindow({
-	Title = "Alchemy" .. " | " .. identifyexecutor(),
-	Size = UDim2.fromOffset(400, 250),
-	Position = UDim2.new(0.5, 0, 0, 70),
-    NoResize = true,
-})
+if (getgenv().AlchemyLoaded == true) then
+	return
+end
 
+getgenv().Library = require("modules/ImGui.lua")
 
+local Services = require("modules/GetServices.lua")
+local GamesList = require("SupportedGames.json")
 
-Window:Center()
+local HttpService = Services:Get("HttpService")
+local SupportedGames = HttpService:JSONEncode(GamesList)
+
+local GameScript = require(string.format("games/%s/main.lua", SupportedGames[game.PlaceId]))
+
+if (not GameScript) then
+	warn("no game script")
+end
