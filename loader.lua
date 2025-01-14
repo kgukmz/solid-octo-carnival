@@ -3,7 +3,8 @@ if (getgenv().AlchemyLoaded == true) then
 end
 
 local Games = {
-	[5208655184] = "RogueLineage"
+	[5208655184] = "RogueLineage";
+	[4483381587] = "LiteralBaseplate";
 }
 
 local Library = require("modules/ImGui.lua")
