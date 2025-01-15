@@ -25,5 +25,4 @@ local function DirectoryRequire(Path)
 end
 
 getgenv().require = DirectoryRequire
-
-DirectoryRequire("loader.lua")
+require("loader.lua")
