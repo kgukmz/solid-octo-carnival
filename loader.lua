@@ -53,6 +53,8 @@ if (getgenv().DebugMode == true and getgenv().ConsoleEnabled ~= true) then
 	getgenv().ConsoleEnabled = true
 end
 
+print("V")
+
 getgenv().ImGui_Window = UIWindow
 
 local GameScriptPath = string.format("games/%s/main.lua", SelectedGame)
