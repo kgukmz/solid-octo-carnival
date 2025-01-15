@@ -11,6 +11,7 @@ local Player = game.Players.LocalPlayer
 local AlchemyClient = {
     Configs = {
         Client = {
+            AntiAfkEnabled = false;
             KillMethod = "Default";
 
             SpeedhackValue = 10;
@@ -44,7 +45,7 @@ local function EnableAntiAFK(_, Value)
             end
 
             Connection:Disable()
-        elseif(Value == false) then
+        elseif (Value == false) then
             if (Connection.Enabled == true) then
                 return
             end
@@ -97,7 +98,7 @@ do -- // CLIENT
 
     ClientTab:Checkbox({
         Label = "Anti-AFK";
-        Value = AlchemyClient.Configs.Client.SpeedhackEnabled;
+        Value = AlchemyClient.Configs.Client.AntiAfkEnabled;
         Callback = EnableAntiAFK;
     })
 
