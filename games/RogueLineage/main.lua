@@ -87,7 +87,7 @@ local function SelfKill()
             return
         end
 
-        firetouchinterest(SealedSword, Player.Character.Torso, 0)
+        firetouchinterest(SealedSword, Player.Character.Torso, 1)
     end
 end
 
