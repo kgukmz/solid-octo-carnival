@@ -2,6 +2,8 @@ if (getgenv().AlchemyLoaded == true) then
 	return
 end
 
+getgenv().DebugConsoleLog = function(...) end
+
 local Games = {
 	[5208655184] = "RogueLineage";
 	[4483381587] = "LiteralBaseplate";

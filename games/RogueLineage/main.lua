@@ -40,16 +40,8 @@ local function EnableAntiAFK(_, Value)
 
     for _, Connection in next, getconnections(Player.Idled) do
         if (Value == true) then
-            if (Connection.Enabled == true) then
-                return
-            end
-
             Connection:Disable()
         elseif (Value == false) then
-            if (Connection.Enabled == false) then
-                return
-            end
-
             Connection:Enable()
         end
 
