@@ -13,7 +13,7 @@ local Player = game.Players.LocalPlayer
 local AlchemyClient = {
     Configs = {
         Client = {
-            ClimbSpeedValue = 0;
+            ClimbSpeedValue = 1;
             ClimbSpeedEnabled = false;
 
             TheSoulEnabled = false;
@@ -202,10 +202,10 @@ do -- // CLIENT
         Label = "Climb Boost";
         Format = "%.d/%s";
 	    Value = AlchemyClient.Configs.Client.ClimbSpeedValue;
-	    MinValue = 0;
-	    MaxValue = 1;
+	    MinValue = 10;
+	    MaxValue = 200;
 	    Callback = function(self, Value)
-            AlchemyClient.Configs.Client.ClimbSpeedValue = Value
+            AlchemyClient.Configs.Client.ClimbSpeedValue = (Value / 100)
 	    end;
     })
 
