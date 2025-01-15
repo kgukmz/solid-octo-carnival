@@ -176,6 +176,8 @@ do -- // CLIENT
 
     local SpoofsHeader = ClientTab:CollapsingHeader({ Title = "Client Spoofs" })
 
+    SpoofsHeader:Separator()
+
     SpoofsHeader:Checkbox({
         Label = "Spoof The Soul";
         Value = AlchemyClient.Configs.Client.TheSoulEnabled;
