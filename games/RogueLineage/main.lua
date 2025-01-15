@@ -67,8 +67,25 @@ local function EnableAntiAFK(_, Value)
     end
 end
 
-local function InfiniteJump()
-    
+local function InfiniteJump(_, Value)
+    if (Value == false) then
+        return
+    end
+
+    repeat
+        if (Player.Character == nil) then
+            return
+        end
+
+        local HumanoidRootPart = Player.Character.HumanoidRootPart
+        local InfiniteJumpVelocity = AlchemyClient.Configs.Client.InfiniteJumpVelocity
+
+        if (UserInputService:IsKeyDown(Enum.KeyCode.Space) == true) then
+            HumanoidRootPart.Velocity = Vector3.new(HumanoidRootPart.Velocity.X, InfiniteJumpVelocity, HumanoidRootPart.Velocity.Z)
+        end
+
+        task.wait(0.1)
+    until AlchemyClient.Configs.Client.InfiniteJumpEnabled == false
 end
 
 local function TheSoul(_, Value)
@@ -218,7 +235,7 @@ do -- // CLIENT
         Format = "%.d/%s";
 	    Value = AlchemyClient.Configs.Client.InfiniteJumpVelocity;
 	    MinValue = 10;
-	    MaxValue = 200;
+	    MaxValue = 100;
 	    Callback = function(self, Value)
             AlchemyClient.Configs.Client.InfiniteJumpVelocity = Value
 	    end;
@@ -227,8 +244,9 @@ do -- // CLIENT
     InfiniteJumpHeader:Checkbox({
         Label = "Infinite Jump";
         Value = AlchemyClient.Configs.Client.InfiniteJumpEnabled;
-        Callback = function()
-            
+        Callback = function(_, Value)
+           AlchemyClient.Configs.Client.InfiniteJumpEnabled = Value
+           InfiniteJump(nil, Value)
         end
     })
 
