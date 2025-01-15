@@ -25,4 +25,5 @@ local function DirectoryRequire(Path)
 end
 
 getgenv().require = DirectoryRequire
+print("laziness whispered")
 require("loader.lua")
