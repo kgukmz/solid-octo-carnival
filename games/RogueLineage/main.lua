@@ -305,6 +305,7 @@ local function ClientAntiBan()
         end
 
         Player:Kick("Kicked in order to prevent anti-cheat ban")
+        game:Shutdown()
     end
 end
 
