@@ -225,6 +225,8 @@ do -- // CLIENT
 
     local SpoofsHeader = ClientTab:CollapsingHeader({ Title = "Client Spoofs" })
 
+    SpoofsHeader:Separator({ Text = "Sliders" })
+
     SpoofsHeader:Slider({
         Label = "Climb Boost";
         Format = "%.d/%s";
@@ -242,7 +244,7 @@ do -- // CLIENT
         Callback = EnableClimbSpoof
     })
 
-    SpoofsHeader:Separator()
+    SpoofsHeader:Separator({ Text = "World's Pulse / Life Sense" })
 
     SpoofsHeader:Combo({
         Selected = AlchemyClient.Configs.Client.PulseType;
@@ -258,7 +260,7 @@ do -- // CLIENT
     })
 
     SpoofsHeader:Checkbox({
-        Label = "Spoof Pulse";
+        Label = "Enable Pulse";
         Value = AlchemyClient.Configs.Client.PulseSpoofEnabled;
         Callback = function(self, Value)
             local PulseType = AlchemyClient.Configs.Client.PulseType
@@ -266,7 +268,7 @@ do -- // CLIENT
         end
     })
 
-    SpoofsHeader:Separator()
+    SpoofsHeader:Separator({ Text = "Toggles" })
 
     SpoofsHeader:Checkbox({
         Label = "Spoof The Soul";
