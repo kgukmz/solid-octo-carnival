@@ -57,3 +57,4 @@ getgenv().ImGui_Window = UIWindow
 local GameScriptPath = string.format("games/%s/main.lua", SelectedGame)
 require(GameScriptPath)
 
+UIWindow:Center()
