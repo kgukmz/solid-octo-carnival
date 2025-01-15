@@ -52,7 +52,7 @@ local function EnableAntiAFK(_, Value)
             Connection:Enable()
         end
 
-        DebugConsoleWarn("Connection value:", Connection.Enabled)
+        DebugConsoleLog("Connection value:", Connection.Enabled)
     end
 end
 
