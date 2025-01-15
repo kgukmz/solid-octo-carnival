@@ -24,11 +24,7 @@ local UIWindow = Library:CreateWindow({
 	NoResize = true,
 })
 
-if (getgenv().DebugMode == true) then
-	if (getgenv().ConsoleEnabled == true) then
-		return
-	end
-
+if (getgenv().DebugMode == true and getgenv().ConsoleEnabled ~= true) then
 	local DebugWindow = Library:CreateWindow({
 		Title = "Alchemy: Debug | " .. identifyexecutor(),
 		Size = UDim2.fromOffset(300, 300),
