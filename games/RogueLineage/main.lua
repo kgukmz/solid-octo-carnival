@@ -57,6 +57,40 @@ local function Reset()
     Character.Head:Destroy()
 end
 
+local function SelfKill()
+    local Configs = AlchemyClient.Configs.Client
+
+    if (Player.Character == nil) then
+        return
+    end
+
+    if (Configs.KillMethod == "Default") then
+        
+    elseif (Configs.KillMethod == "Solans") then
+        local SealedSword
+        
+        for _, Object in next, getinstances() do
+            if (Object.Name ~= "SealedSword") then
+                continue
+            end
+
+            if (Object.Parent.ClassName ~= "Folder") then
+                continue
+            end
+
+            SealedSword = Object
+            break
+        end
+
+        if (SealedSword == nil) then
+            DebugConsoleLog("Solans has already been pulled")
+            return
+        end
+
+        firetouchinterest(SealedSword, Player.Character.Torso, true)
+    end
+end
+
 local function EnableAntiAFK(_, Value)
     if (getgenv().getconnections == nil) then
         return
@@ -91,7 +125,7 @@ local function Speedhack(_, Value)
 
         BodyVelocity.Parent = HumanoidRootPart
         
-        if (Humanoid.MoveDirection.Magnitude > 0 ) then
+        if (Humanoid.MoveDirection.Magnitude > 0) then
             BodyVelocity.Velocity = BodyVelocity.Velocity * Humanoid.MoveDirection.Unit * AlchemyClient.Configs.Client.SpeedhackValue
         end
 
@@ -252,6 +286,7 @@ do -- // CLIENT
 
     ButtonRow:Button({
         Text = "Kill Self";
+        Callback = SelfKill
     })
 
     ButtonRow:Button({
