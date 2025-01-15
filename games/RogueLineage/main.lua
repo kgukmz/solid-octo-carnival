@@ -11,6 +11,8 @@ local Player = game.Players.LocalPlayer
 local AlchemyClient = {
     Configs = {
         Client = {
+            KillMethod = "Default";
+
             SpeedhackValue = 10;
             SpeedhackEnabled = false;
 
@@ -19,6 +21,16 @@ local AlchemyClient = {
         };
     }
 }
+
+local function Reset()
+    local Character = Player.Character
+
+    if (Character:FindFirstChild("Head") == nil) then
+        return
+    end
+
+    Character.Head:Destroy()
+end
 
 local function InfiniteJump()
     
@@ -34,3 +46,29 @@ local WindowTabs = {
         Visible = true;
     });
 }
+
+do -- // CLIENT
+    local ClientTab = WindowTabs.Client
+    local ButtonRow = ClientTab:Row()
+
+    ButtonRow:Button({
+        Text = "Reset";
+        Callback = Reset;
+    })
+
+    ButtonRow:Button({
+        Text = "Kill Self";
+    })
+
+    ClientTab:Separator({ Text = "CLIENT" })
+
+    ClientTab:Combo({
+        Selected = AlchemyClient.Configs.Client.KillMethod;
+        Items = {"Default"; "Solans"};
+        Callback = function(self, Value)
+            AlchemyClient.Configs.Client.KillMethod = Value
+        end;
+    })
+
+    ButtonRow:Fill()
+end
