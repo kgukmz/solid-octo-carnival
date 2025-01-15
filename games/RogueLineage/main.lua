@@ -138,6 +138,30 @@ local function InfiniteJump(_, Value)
         return
     end
 
+    local SpaceDown = false
+
+    local InputBegan
+    InputBegan = UserInputService.InputBegan:Connect(function(GameProcessed, Input)
+        if (GameProcessed) then
+            return
+        end
+
+        if (Input.KeyCode == Enum.KeyCode.Space) then
+            SpaceDown = true
+        end
+    end)
+
+    local InputEnded
+    InputEnded = UserInputService.InputEnded:Connect(function(GameProcessed, Input)
+        if (GameProcessed) then
+            return
+        end
+
+        if (Input.KeyCode == Enum.KeyCode.Space) then
+            SpaceDown = false
+        end
+    end)
+
     repeat
         if (Player.Character == nil) then
             return
@@ -146,12 +170,15 @@ local function InfiniteJump(_, Value)
         local HumanoidRootPart = Player.Character.HumanoidRootPart
         local InfiniteJumpVelocity = AlchemyClient.Configs.Client.InfiniteJumpVelocity
 
-        if (UserInputService:IsKeyDown(Enum.KeyCode.Space) == true) then
+        if (SpaceDown == true) then
             HumanoidRootPart.Velocity = Vector3.new(HumanoidRootPart.Velocity.X, InfiniteJumpVelocity, HumanoidRootPart.Velocity.Z)
         end
 
         task.wait(0.1)
     until AlchemyClient.Configs.Client.InfiniteJumpEnabled == false
+
+    InputBegan:Disconnect()
+    InputEnded:Disconnect()
 end
 
 local function TheSoul(_, Value)
@@ -242,9 +269,12 @@ local function RemoveBarriers(_, Value)
         end
 
         for i, v in next, OrderlyBarriers do
-            if (v.Parent == nil) then
-                v.Parent = workspace.Map
+            if (v.Parent ~= nil) then
+                continue
             end
+
+            
+            v.Parent = workspace.Map
         end
     end
 end
