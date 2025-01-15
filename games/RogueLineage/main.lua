@@ -229,7 +229,7 @@ end
 local function RemoveBarriers(_, Value)
     if (Value == true) then
         for i, v in next, getinstances() do
-            if (v.Name ~= "OrderField") then
+            if (v.Name ~= "OrderField" and v.Name ~= "MageField") then
                 continue
             end
 
@@ -430,7 +430,7 @@ local function ClientAntiBan()
         end
 
         Player:Kick("Kicked in order to prevent anti-cheat ban")
-        game:Shutdown()
+        ShutdownClient()
     end
 end
 
