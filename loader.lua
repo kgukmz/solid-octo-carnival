@@ -35,7 +35,7 @@ if (getgenv().DebugMode == true) then
 	})
 
 	local DebugConsole = DebugWindow:Console({
-		Text = "[DEBUG]";
+		Text = "[DEBUG WINDOW]";
 		ReadOnly = true;
 		Border = false;
 		Fill = true;
