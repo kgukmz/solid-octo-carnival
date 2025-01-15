@@ -64,10 +64,55 @@ do -- // CLIENT
 
     ClientTab:Combo({
         Selected = AlchemyClient.Configs.Client.KillMethod;
+        Label = "Kill Method";
         Items = {"Default"; "Solans"};
         Callback = function(self, Value)
             AlchemyClient.Configs.Client.KillMethod = Value
         end;
+    })
+
+    local SpeedhackHeader = ClientTab:CollapsingHeader({ Title = "Speedhack" })
+    
+    SpeedhackHeader:Slider({
+        Label = "Speed";
+        Format = "%.d/%s";
+	    Value = AlchemyClient.Configs.Client.SpeedhackValue;
+	    MinValue = 10;
+	    MaxValue = 200;
+
+	    Callback = function(self, Value)
+            AlchemyClient.Configs.Client.SpeedhackValue = Value
+	    end;
+    })
+
+    SpeedhackHeader:Checkbox({
+        Label = "Speedhack";
+        Value = AlchemyClient.Configs.Client.SpeedhackEnabled;
+        Callback = function()
+            
+        end
+    })
+
+    local InfiniteJumpHeader = ClientTab:CollapsingHeader({ Title = "Infinite Jump" })
+
+    InfiniteJumpHeader:Slider({
+        Label = "Velocity";
+        Format = "%.d/%s";
+	    Value = AlchemyClient.Configs.Client.InfiniteJumpVelocity;
+	    MinValue = 10;
+	    MaxValue = 200;
+
+	    Callback = function(self, Value)
+            AlchemyClient.Configs.Client.InfiniteJumpVelocity = Value
+	    end;
+    })
+
+    InfiniteJumpHeader:Checkbox({
+        Label = "Infinite Jump";
+        Value = AlchemyClient.Configs.Client.InfiniteJumpEnabled;
+        Callback = function()
+            
+        end
     })
 
     ButtonRow:Fill()
