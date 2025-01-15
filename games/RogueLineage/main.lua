@@ -16,7 +16,7 @@ local AlchemyClient = {
             PulseType = "LifeSense";
             PulseSpoofEnabled = false;
 
-            ClimbSpeedValue = 1;
+            ClimbSpeedValue = 10;
             ClimbSpeedEnabled = false;
 
             TheSoulEnabled = false;
@@ -36,6 +36,10 @@ local AlchemyClient = {
 
 RunService:UnbindFromRenderStep("ClientAntiBan")
 RunService:UnbindFromRenderStep("ClientChecks")
+
+local function ShutdownClient()
+    game:Shutdown()
+end
 
 local function Reset()
     local Character = Player.Character
@@ -161,6 +165,11 @@ do -- // CLIENT
 
     ButtonRow:Button({
         Text = "Kill Self";
+    })
+
+    ButtonRow:Button({
+        Text = "Shutdown Client";
+        Callback = ShutdownClient;
     })
 
     ClientTab:Separator({ Text = "CLIENT" })
