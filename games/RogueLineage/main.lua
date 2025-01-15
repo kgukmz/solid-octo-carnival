@@ -13,6 +13,9 @@ local Player = game.Players.LocalPlayer
 local AlchemyClient = {
     Configs = {
         Client = {
+            PulseType = "LifeSense";
+            PulseSpoofEnabled = false;
+
             ClimbSpeedValue = 1;
             ClimbSpeedEnabled = false;
 
@@ -31,6 +34,7 @@ local AlchemyClient = {
     }
 }
 
+RunService:UnbindFromRenderStep("ClientAntiBan")
 RunService:UnbindFromRenderStep("ClientChecks")
 
 local function Reset()
@@ -109,6 +113,29 @@ local function EnableClimbSpoof(_, Value)
 
         ClimbBoost:Destroy()
         ClimbBoost = nil
+    end
+end
+
+local function EnablePulse(Type, Value)
+    if (Value == true) then
+        local PulseType = Instance.new("Accessory")
+        PulseType.Name = Type
+        PulseType.Parent = Player.Character
+
+        CollectionService:AddTag(PulseType, "1e9")
+    else
+        for _, PulseType in next, {"LifeSense", "WorldPulseUltra", "WorldPulse"} do
+            local PulseInstance = Player.Character:FindFirstChild(PulseType)
+            if (not PulseInstance) then
+                continue
+            end
+
+            if (not CollectionService:HasTag(PulseInstance, "1e9")) then
+                continue
+            end
+
+            PulseInstance:Destroy()
+        end
     end
 end
 
@@ -217,6 +244,30 @@ do -- // CLIENT
 
     SpoofsHeader:Separator()
 
+    SpoofsHeader:Combo({
+        Selected = AlchemyClient.Configs.Client.PulseType;
+        Label = "Pulse Type";
+        Items = {
+            "LifeSense";
+            "WorldPulseUltra";
+            "WorldPulse";
+        };
+        Callback = function(self, Value)
+            AlchemyClient.Configs.Client.PulseType = Value
+        end;
+    })
+
+    SpoofsHeader:Checkbox({
+        Label = "Spoof Pulse";
+        Value = AlchemyClient.Configs.Client.PulseSpoofEnabled;
+        Callback = function(self, Value)
+            local PulseType = AlchemyClient.Configs.Client.PulseType
+            EnablePulse(PulseType, Value)
+        end
+    })
+
+    SpoofsHeader:Separator()
+
     SpoofsHeader:Checkbox({
         Label = "Spoof The Soul";
         Value = AlchemyClient.Configs.Client.TheSoulEnabled;
@@ -232,6 +283,20 @@ do -- // CLIENT
     ButtonRow:Fill()
 end
 
+local function ClientAntiBan()
+    if (Player.Character == nil) then
+        return
+    end
+    
+    for i, v : AnimationTrack in next, Player.Character.Humanoid:GetPlayingAnimationTracks() do
+        if (string.match(v.Animation.AnimationId, "4595066903") == nil) then
+            continue
+        end
+
+        Player:Kick("Kicked in order to prevent anti-cheat ban")
+    end
+end
+
 local function ClientChecks()
     if (ClimbBoost ~= nil) then
         local ClimbBoostValue = AlchemyClient.Configs.Client.ClimbSpeedValue
@@ -239,4 +304,5 @@ local function ClientChecks()
     end
 end
 
+RunService:BindToRenderStep("ClientAntiBan", 1, ClientAntiBan)
 RunService:BindToRenderStep("ClientChecks", 1, ClientChecks)
