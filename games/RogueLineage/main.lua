@@ -3,6 +3,7 @@ print("ippatsushobuda - sae itoshi")
 local UIWindow = getgenv().ImGui_Window
 
 local UserInputService = cloneref(game:GetService("UserInputService"))
+local CollectionService = cloneref(game:GetService("CollectionService"))
 local ReplicatedStorage = cloneref(game:GetService("ReplicatedStorage"))
 local Players = cloneref(game:GetService("Players"))
 
@@ -11,6 +12,8 @@ local Player = game.Players.LocalPlayer
 local AlchemyClient = {
     Configs = {
         Client = {
+            TheSoulEnabled = false;
+
             AntiAfkEnabled = false;
             KillMethod = "Default";
 
@@ -41,16 +44,32 @@ local function EnableAntiAFK(_, Value)
     for _, Connection in next, getconnections(Player.Idled) do
         if (Value == true) then
             Connection:Disable()
+            DebugConsoleLog("Enabled Anti-AFK")
         elseif (Value == false) then
             Connection:Enable()
+            DebugConsoleLog("Disabled Anti-AFK")
         end
-
-        DebugConsoleLog("Connected?:", Connection.Enabled)
     end
 end
 
 local function InfiniteJump()
     
+end
+
+local function TheSoul(_, Value)
+    if (Value == true) then
+        if (CollectionService:HasTag(Player.Character, "The Soul")) then
+            return
+        end
+
+        CollectionService:AddTag(Player.Character, "The Soul")
+    elseif (Value == false) then
+        if (not CollectionService:HasTag(Player.Characte, "The Soul")) then
+            return
+        end
+
+        CollectionService:RemoveTag(Player.Character, "The Soul")
+    end
 end
 
 local WindowTabs = {
@@ -136,6 +155,14 @@ do -- // CLIENT
         Callback = function()
             
         end
+    })
+
+    local SpoofsHeader = ClientTab:CollapsingHeader({ Title = "Client Spoofs" })
+
+    SpoofsHeader:Checkbox({
+        Label = "Spoof The Soul";
+        Value = AlchemyClient.Configs.Client.TheSoulEnabled;
+        Callback = TheSoul
     })
 
     ButtonRow:Fill()
