@@ -64,7 +64,7 @@ local function TheSoul(_, Value)
 
         CollectionService:AddTag(Player.Character, "The Soul")
     elseif (Value == false) then
-        if (not CollectionService:HasTag(Player.Characte, "The Soul")) then
+        if (not CollectionService:HasTag(Player.Character, "The Soul")) then
             return
         end
 
