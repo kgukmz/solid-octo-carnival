@@ -207,7 +207,7 @@ do -- // MAIN
     local WorldHeader = WorldTab:CollapsingHeader({ Title = "World"; })
 
     WorldHeader:Checkbox({
-        Label = "Remove Orderly Barriers";
+        Label = "Remove Orderly Fields";
         Value = AlchemyClient.Configs.Main.NoOrderlyBarriers;
         Callback = RemoveBarriers
     })
