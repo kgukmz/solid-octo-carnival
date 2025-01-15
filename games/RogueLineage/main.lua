@@ -103,6 +103,10 @@ local function EnableClimbSpoof(_, Value)
         ClimbBoost.Value = AlchemyClient.Configs.Client.ClimbSpeedValue
         ClimbBoost.Parent = Player.Character.Boosts
     elseif (Value == false) then
+        if (ClimbBoost == nil) then
+            return
+        end
+        
         ClimbBoost:Destroy()
         ClimbBoost = nil
     end
