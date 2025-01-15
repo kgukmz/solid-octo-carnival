@@ -2,6 +2,7 @@ print("ippatsushobuda - sae itoshi")
 
 local UIWindow = getgenv().ImGui_Window
 
+local RunService = cloneref(game:GetService("RunService"))
 local UserInputService = cloneref(game:GetService("UserInputService"))
 local CollectionService = cloneref(game:GetService("CollectionService"))
 local ReplicatedStorage = cloneref(game:GetService("ReplicatedStorage"))
@@ -12,6 +13,9 @@ local Player = game.Players.LocalPlayer
 local AlchemyClient = {
     Configs = {
         Client = {
+            ClimbSpeedValue = 1;
+            ClimbSpeedEnabled = false;
+
             TheSoulEnabled = false;
             AcrobatEnabled = false;
 
@@ -26,6 +30,8 @@ local AlchemyClient = {
         };
     }
 }
+
+RunService:UnbindFromRenderStep("ClientChecks")
 
 local function Reset()
     local Character = Player.Character
@@ -86,6 +92,19 @@ local function Acrobat(_, Value)
         end
 
         CollectionService:RemoveTag(Player.Character, "Acrobat")
+    end
+end
+
+local ClimbBoost 
+local function EnableClimbSpoof(_, Value)
+    if (Value == true) then
+        ClimbBoost = Instance.new("NumberValue")
+        ClimbBoost.Name = "ClimbBoost"
+        ClimbBoost.Value = AlchemyClient.Configs.Client.ClimbSpeedValue
+        ClimbBoost.Parent = Player.Character.Boosts
+    elseif (Value == false) then
+        ClimbBoost:Destroy()
+        ClimbBoost = nil
     end
 end
 
@@ -160,7 +179,6 @@ do -- // CLIENT
 	    Value = AlchemyClient.Configs.Client.InfiniteJumpVelocity;
 	    MinValue = 10;
 	    MaxValue = 200;
-
 	    Callback = function(self, Value)
             AlchemyClient.Configs.Client.InfiniteJumpVelocity = Value
 	    end;
@@ -175,6 +193,23 @@ do -- // CLIENT
     })
 
     local SpoofsHeader = ClientTab:CollapsingHeader({ Title = "Client Spoofs" })
+
+    SpoofsHeader:Slider({
+        Label = "Climb Boost";
+        Format = "%.d/%s";
+	    Value = AlchemyClient.Configs.Client.ClimbSpeedValue;
+	    MinValue = 1;
+	    MaxValue = 40;
+	    Callback = function(self, Value)
+            AlchemyClient.Configs.Client.ClimbSpeedValue = Value
+	    end;
+    })
+
+    SpoofsHeader:Checkbox({
+        Label = "Spoof Climb Speed";
+        Value = AlchemyClient.Configs.Client.ClimbSpeedEnabled;
+        Callback = EnableClimbSpoof
+    })
 
     SpoofsHeader:Separator()
 
@@ -192,3 +227,12 @@ do -- // CLIENT
 
     ButtonRow:Fill()
 end
+
+local function ClientChecks()
+    if (ClimbBoost ~= nil) then
+        local ClimbBoostValue = AlchemyClient.Configs.Client.ClimbSpeedValue
+        ClimbBoost.Value = ClimbBoostValue
+    end
+end
+
+RunService:BindToRenderStep("ClientChecks", 1, ClientChecks)
