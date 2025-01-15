@@ -87,7 +87,7 @@ local function SelfKill()
             return
         end
 
-        firetouchinterest(SealedSword, Player.Character.Torso, true)
+        firetouchinterest(SealedSword, Player.Character.Torso, 0)
     end
 end
 
@@ -99,10 +99,8 @@ local function EnableAntiAFK(_, Value)
     for _, Connection in next, getconnections(Player.Idled) do
         if (Value == true) then
             Connection:Disable()
-            DebugConsoleLog("Enabled Anti-AFK")
         elseif (Value == false) then
             Connection:Enable()
-            DebugConsoleLog("Disabled Anti-AFK")
         end
     end
 end
