@@ -381,3 +381,5 @@ end
 
 RunService:BindToRenderStep("ClientAntiBan", 1, ClientAntiBan)
 RunService:BindToRenderStep("ClientChecks", 1, ClientChecks)
+
+UIWindow:ShowTab(WindowTabs.Main)
