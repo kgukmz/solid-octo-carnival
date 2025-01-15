@@ -73,6 +73,34 @@ local function EnableAntiAFK(_, Value)
     end
 end
 
+local function Speedhack(_, Value)
+    if (Value == false) then
+        return
+    end
+
+    local BodyVelocity = Instance.new("BodyVelocity")
+    BodyVelocity.MaxForce = Vector3.new(1, 1, 1) * math.huge
+
+    repeat
+        if (Player.Character == nil) then
+            return
+        end
+
+        local Humanoid = Player.Character.Humanoid
+        local HumanoidRootPart = Player.Character.HumanoidRootPart
+
+        BodyVelocity.Parent = HumanoidRootPart
+        
+        if (Humanoid.MoveDirection.Magnitude > 0 ) then
+            BodyVelocity.Velocity = BodyVelocity.Velocity * Humanoid.MoveDirection.Unit * AlchemyClient.Configs.Client.SpeedhackValue
+        end
+
+        task.wait()
+    until AlchemyClient.Configs.Client.SpeedhackEnabled == false
+
+    BodyVelocity:Destroy()
+end
+
 local function InfiniteJump(_, Value)
     if (Value == false) then
         return
@@ -265,9 +293,7 @@ do -- // CLIENT
     SpeedhackHeader:Checkbox({
         Label = "Speedhack";
         Value = AlchemyClient.Configs.Client.SpeedhackEnabled;
-        Callback = function()
-            
-        end
+        Callback = Speedhack;
     })
 
     local InfiniteJumpHeader = ClientTab:CollapsingHeader({ Title = "Infinite Jump" })
