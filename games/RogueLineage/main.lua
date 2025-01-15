@@ -293,7 +293,10 @@ do -- // CLIENT
     SpeedhackHeader:Checkbox({
         Label = "Speedhack";
         Value = AlchemyClient.Configs.Client.SpeedhackEnabled;
-        Callback = Speedhack;
+        Callback = function(self, Value)
+            AlchemyClient.Configs.Client.SpeedhackEnabled = Value
+            Speedhack(nil, Value)
+        end
     })
 
     local InfiniteJumpHeader = ClientTab:CollapsingHeader({ Title = "Infinite Jump" })
@@ -312,7 +315,7 @@ do -- // CLIENT
     InfiniteJumpHeader:Checkbox({
         Label = "Infinite Jump";
         Value = AlchemyClient.Configs.Client.InfiniteJumpEnabled;
-        Callback = function(_, Value)
+        Callback = function(self, Value)
            AlchemyClient.Configs.Client.InfiniteJumpEnabled = Value
            InfiniteJump(nil, Value)
         end
