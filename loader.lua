@@ -30,7 +30,7 @@ if (getgenv().DebugMode == true) then
 		Size = UDim2.fromOffset(300, 300),
 		Position = UDim2.new(0.5, 0, 0, 70),
 	}):CreateTab({
-		Name = "Main";
+		Name = "Console";
         Visible = true;
 	})
 
