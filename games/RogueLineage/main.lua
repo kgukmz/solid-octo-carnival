@@ -13,7 +13,7 @@ local Player = game.Players.LocalPlayer
 local AlchemyClient = {
     Configs = {
         Client = {
-            ClimbSpeedValue = 1;
+            ClimbSpeedValue = 0;
             ClimbSpeedEnabled = false;
 
             TheSoulEnabled = false;
@@ -106,7 +106,7 @@ local function EnableClimbSpoof(_, Value)
         if (ClimbBoost == nil) then
             return
         end
-        
+
         ClimbBoost:Destroy()
         ClimbBoost = nil
     end
@@ -202,8 +202,8 @@ do -- // CLIENT
         Label = "Climb Boost";
         Format = "%.d/%s";
 	    Value = AlchemyClient.Configs.Client.ClimbSpeedValue;
-	    MinValue = 1;
-	    MaxValue = 40;
+	    MinValue = 0;
+	    MaxValue = 1;
 	    Callback = function(self, Value)
             AlchemyClient.Configs.Client.ClimbSpeedValue = Value
 	    end;
