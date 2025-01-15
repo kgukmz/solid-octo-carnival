@@ -25,6 +25,10 @@ local UIWindow = Library:CreateWindow({
 })
 
 if (getgenv().DebugMode == true) then
+	if (getgenv().ConsoleEnabled == true) then
+		return
+	end
+
 	local DebugWindow = Library:CreateWindow({
 		Title = "Alchemy: Debug | " .. identifyexecutor(),
 		Size = UDim2.fromOffset(300, 300),
@@ -50,6 +54,7 @@ if (getgenv().DebugMode == true) then
 	end
 
 	getgenv().DebugConsoleLog = DebugConsoleLog
+	getgenv().ConsoleEnabled = true
 end
 
 getgenv().ImGui_Window = UIWindow

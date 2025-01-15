@@ -32,6 +32,30 @@ local function Reset()
     Character.Head:Destroy()
 end
 
+local function EnableAntiAFK(_, Value)
+    if (getgenv().getconnections == nil) then
+        return
+    end
+
+    for _, Connection in next, getconnections(Player.Idled) do
+        if (Value == true) then
+            if (Connection.Enabled == false) then
+                return
+            end
+
+            Connection:Disable()
+        elseif(Value == false) then
+            if (Connection.Enabled == true) then
+                return
+            end
+
+            Connection:Enable()
+        end
+
+        DebugConsoleWarn("Connection value:", Connection.Enabled)
+    end
+end
+
 local function InfiniteJump()
     
 end
@@ -69,6 +93,12 @@ do -- // CLIENT
         Callback = function(self, Value)
             AlchemyClient.Configs.Client.KillMethod = Value
         end;
+    })
+
+    ClientTab:Checkbox({
+        Label = "Anti-AFK";
+        Value = AlchemyClient.Configs.Client.SpeedhackEnabled;
+        Callback = EnableAntiAFK;
     })
 
     local SpeedhackHeader = ClientTab:CollapsingHeader({ Title = "Speedhack" })
