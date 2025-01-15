@@ -13,6 +13,7 @@ local AlchemyClient = {
     Configs = {
         Client = {
             TheSoulEnabled = false;
+            AcrobatEnabled = false;
 
             AntiAfkEnabled = false;
             KillMethod = "Default";
@@ -69,6 +70,22 @@ local function TheSoul(_, Value)
         end
 
         CollectionService:RemoveTag(Player.Character, "The Soul")
+    end
+end
+
+local function Acrobat(_, Value)
+    if (Value == true) then
+        if (CollectionService:HasTag(Player.Character, "Acrobat")) then
+            return
+        end
+
+        CollectionService:AddTag(Player.Character, "Acrobat")
+    elseif (Value == false) then
+        if (not CollectionService:HasTag(Player.Character, "Acrobat")) then
+            return
+        end
+
+        CollectionService:RemoveTag(Player.Character, "Acrobat")
     end
 end
 
@@ -163,6 +180,12 @@ do -- // CLIENT
         Label = "Spoof The Soul";
         Value = AlchemyClient.Configs.Client.TheSoulEnabled;
         Callback = TheSoul
+    })
+
+    SpoofsHeader:Checkbox({
+        Label = "Spoof Acrobat";
+        Value = AlchemyClient.Configs.Client.AcrobatEnabled;
+        Callback = Acrobat;
     })
 
     ButtonRow:Fill()
