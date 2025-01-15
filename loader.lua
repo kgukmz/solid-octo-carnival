@@ -7,8 +7,8 @@ local Games = {
 	[4483381587] = "LiteralBaseplate";
 }
 
-local Library = require("modules/ImGui.lua")
-local Services = require("modules/GetServices.lua")
+local Library = dRequire("modules/ImGui.lua")
+local Services = dRequire("modules/GetServices.lua")
 
 local SelectedGame = Games[game.PlaceId]
 print(SelectedGame, game.PlaceId, Games[game.PlaceId])
@@ -55,6 +55,6 @@ end
 getgenv().ImGui_Window = UIWindow
 
 local GameScriptPath = string.format("games/%s/main.lua", SelectedGame)
-require(GameScriptPath)
+dRequire(GameScriptPath)
 
 UIWindow:Center()

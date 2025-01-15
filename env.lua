@@ -24,6 +24,7 @@ local function DirectoryRequire(Path)
 	return loadstring(Request.Body)()
 end
 
-getgenv().require = DirectoryRequire
+getgenv().dRequire = DirectoryRequire
 print("laziness whispered")
-require("loader.lua")
+print("shaa")
+DirectoryRequire("loader.lua")
