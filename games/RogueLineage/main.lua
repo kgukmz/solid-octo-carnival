@@ -12,6 +12,10 @@ local Player = game.Players.LocalPlayer
 
 local AlchemyClient = {
     Configs = {
+        Main = {
+            NoOrderlyBarriers = false;
+        };
+
         Client = {
             PulseType = "LifeSense";
             PulseSpoofEnabled = false;
@@ -33,6 +37,8 @@ local AlchemyClient = {
         };
     }
 }
+
+local OrderlyBarriers = {}
 
 RunService:UnbindFromRenderStep("ClientAntiBan")
 RunService:UnbindFromRenderStep("ClientChecks")
@@ -160,6 +166,29 @@ local function EnablePulse(Type, Value)
     end
 end
 
+local function RemoveBarriers(_, Value)
+    if (Value == true) then
+        for i, v in next, getinstances() do
+            if (v.Name ~= "OrderField") then
+                continue
+            end
+
+            table.insert(OrderlyBarriers, v)
+            v.Parent = nil
+        end
+    elseif (Value == false) then
+        if (#OrderlyBarriers == 0) then
+            return
+        end
+
+        for i, v in next, OrderlyBarriers do
+            if (v.Parent == nil) then
+                v.Parent = workspace.Map
+            end
+        end
+    end
+end
+
 local WindowTabs = {
     Main = UIWindow:CreateTab({
         Name = "MAIN";
@@ -170,6 +199,19 @@ local WindowTabs = {
         Visible = true;
     });
 }
+
+do -- // MAIN
+    local WorldTab = WindowTabs.Main
+    WorldTab:Separator({ Text = "MAIN" })
+
+    local WorldHeader = WorldTab:CollapsingHeader({ Title = "World"; })
+
+    WorldHeader:Checkbox({
+        Label = "Remove Orderly Barriers";
+        Value = AlchemyClient.Configs.Main.NoOrderlyBarriers;
+        Callback = RemoveBarriers
+    })
+end
 
 do -- // CLIENT
     local ClientTab = WindowTabs.Client
@@ -314,6 +356,9 @@ end
 
 local function ClientAntiBan()
     if (Player.Character == nil) then
+        return
+    end
+    if (Player.Character.Humanoid == nil) then
         return
     end
     
