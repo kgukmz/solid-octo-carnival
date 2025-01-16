@@ -40,6 +40,12 @@ local AlchemyClient = {
 
 local OrderlyBarriers = {}
 
+if (getgenv().getconnections ~= nil) then
+    for i, v in next, getconnections(game:GetService("ScriptContext").Error) do
+        v:Disable()
+    end
+end
+
 RunService:UnbindFromRenderStep("ClientAntiBan")
 RunService:UnbindFromRenderStep("ClientChecks")
 
