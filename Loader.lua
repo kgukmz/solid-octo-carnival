@@ -1,8 +1,4 @@
-print("Loader")
-
 local GameData = Get_Script("Modules/GameData.lua")
-
-print("Hi")
 local SelectedGame = GameData:GetGame()
 warn(SelectedGame)
 

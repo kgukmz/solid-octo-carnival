@@ -32,7 +32,10 @@ local function GetScript(Path)
 		return nil
 	end
 
-	return loadstring(Request.Body)()
+	local LSFunc = loadstring(Request.Body)()
+	debug.traceback()
+	
+	return LSFunc
 end
 
 getgenv().GetService = GetService
