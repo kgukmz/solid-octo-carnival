@@ -101,10 +101,10 @@ function Removals:RemoveKillBricks(Value)
     end
 end
 
-function Removals:RemoveAmbient(Value)
+function Removals:RemoveAmbient(Value) -- // Add a scale later maybe lol
     if (Value == true) then
         OldAmbient = Lighting.Ambient
-        Lighting.Ambient = Color3.fromRGB(255, 255, 255)
+        Lighting.Ambient = Color3.fromRGB(220, 220, 220)
         print("Set ambient to white")
 
         FullbrightConnect:Connect(function(NewValue)
