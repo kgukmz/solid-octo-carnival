@@ -1,5 +1,7 @@
 local Main = {}
 
+local Removals = Get_Script("Games/Rogue-Lineage/Features/Removals.lua")
+
 function Main:Load(Window)
     local Tab = Window:CreateTab({
         Name = "MAIN";
@@ -16,6 +18,7 @@ function Main:Load(Window)
     WorldHeader:Checkbox({
         Label = "Remove Orderly Fields";
         Value = false; -- // add configs
+        Callback = Removals.RemoveOrderFields
     });
 
     return Tab
