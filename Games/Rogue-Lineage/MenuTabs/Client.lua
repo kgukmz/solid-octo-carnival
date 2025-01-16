@@ -24,6 +24,12 @@ function Client:Load(Window)
     });
 
     Tab:Checkbox({
+        Label = "No Sanity [Sunken]";
+        Value = false; -- // add configs
+        Callback = Character.NoBlur;
+    });
+
+    Tab:Checkbox({
         Label = "No Blur";
         Value = false; -- // add configs
         Callback = Character.NoBlur;

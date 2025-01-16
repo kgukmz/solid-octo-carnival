@@ -25,4 +25,9 @@ function Character:NoBlindness(Value)
     Blindness.Enabled = not Value
 end
 
+function Character:NoSanity(Value)
+    local Sanity = Lighting:FindFirstChild("Sanity")
+    Sanity.Enabled = not Value
+end
+
 return Character
