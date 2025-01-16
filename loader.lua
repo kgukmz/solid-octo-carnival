@@ -7,6 +7,7 @@ getgenv().DebugConsoleLog = function(...) end
 local Games = {
 	[5208655184] = "RogueLineage";
 	[4483381587] = "LiteralBaseplate";
+	[18668065416] = "BlueLockRivals";
 }
 
 local Library = dRequire("modules/ImGui.lua")
