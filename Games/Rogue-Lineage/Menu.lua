@@ -14,8 +14,7 @@ function Menu:Load()
     })
 
     -- // Load tabs
-    print("Loading...")
-    print(self.Window)
+    print("[ALCHEMY] Loading tabs...")
     Main:Load(self.Window)
 
     -- // self.Window:ShowTab(self.TabNameHere)
