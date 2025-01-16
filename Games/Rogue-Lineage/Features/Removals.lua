@@ -104,6 +104,7 @@ end
 function Removals:RemoveAmbient(Value)
     if (Value == true) then
         Lighting.Ambient = Color3.fromRGB(255, 255, 255)
+        print("Set ambient to white")
 
         FullbrightConnect:Connect(function(NewValue)
             OldAmbient = NewValue
@@ -114,6 +115,7 @@ function Removals:RemoveAmbient(Value)
 
         if (OldAmbient ~= nil) then
             Lighting.Ambient = OldAmbient
+            print("Reverted to original ambient")
         end
     end
 end
