@@ -1,13 +1,13 @@
-local OldRequire = require
+if (getgenv().cloneref == nil) then
+	warn("cloneref is not supported")
+	return nil
+end
+
+local function GetService(Service)
+	return cloneref(game:GetService(Service))
+end
 
 local function DirectoryRequire(Path)
-	--[[
-	if (type(Path) ~= "string") then
-		local ModuleScript = OldRequire(Path)
-		return ModuleScript
-	end
-	--]]
-
 	local MainDirectory = "https://raw.githubusercontent.com/kgukmz/solid-octo-carnival/refs/heads/main/"
 	local RequestedFile = (MainDirectory .. Path)
 
@@ -26,5 +26,5 @@ local function DirectoryRequire(Path)
 	return loadstring(Request.Body)()
 end
 
+getgenv().GetService = GetService
 getgenv().dRequire = DirectoryRequire
-DirectoryRequire("loader.lua")
