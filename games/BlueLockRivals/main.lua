@@ -48,6 +48,7 @@ local function AutoDribble(Enabled)
 
                 if (Sliding.Value == true) then
                     if (LocalPlayer.Character.Values.HasBall == false) then
+                        DebugConsoleLog("No ball")
                         return
                     end
 
