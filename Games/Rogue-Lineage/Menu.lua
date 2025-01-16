@@ -2,6 +2,8 @@ local Menu = {}
 
 local Library = Get_Script("Modules/UI/ImGui.lua")
 
+local Main = Get_Script("Games/RogueLineage/MenuTabs/Main.lua")
+
 function Menu:Load()
     self.Library = Library
     self.Window = Library:CreateWindow({
@@ -12,6 +14,7 @@ function Menu:Load()
     })
 
     -- // Load tabs
+    Main:Load(self.Window)
 
     -- // self.Window:ShowTab(self.TabNameHere)
     self.Window:Center()
