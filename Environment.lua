@@ -3,6 +3,15 @@ if (getgenv().cloneref == nil) then
 	return nil
 end
 
+if (getgenv().http_request == nil) then
+	if (getgenv().request == nil) then
+		warn("Neither http_request or request is supported")
+		return
+	end
+
+	getgenv().http_request = getgenv().request
+end
+
 local function GetService(Service)
 	return cloneref(game:GetService(Service))
 end
