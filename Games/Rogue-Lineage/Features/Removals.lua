@@ -54,7 +54,6 @@ function Removals:RemoveKillBricks(Value)
     }
 
     if (Value == true) then
-
         if (#FakeKillbricks > 0) then
             for i, Object in next, getinstances() do
                 if (not table.find(BrickNames, Object.Name)) then
