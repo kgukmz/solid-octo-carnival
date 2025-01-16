@@ -7,7 +7,7 @@ local function GetService(Service)
 	return cloneref(game:GetService(Service))
 end
 
-local function DirectoryRequire(Path)
+local function GetScript(Path)
 	local MainDirectory = "https://raw.githubusercontent.com/kgukmz/solid-octo-carnival/refs/heads/main/"
 	local RequestedFile = (MainDirectory .. Path)
 
@@ -27,4 +27,4 @@ local function DirectoryRequire(Path)
 end
 
 getgenv().GetService = GetService
-getgenv().dRequire = DirectoryRequire
+getgenv().Get_Script = GetScript
