@@ -7,8 +7,11 @@ if (SelectedGame == nil) then
     return
 end
 
+print("Game data!")
+
 local Success, Menu = pcall(function()
     local ScriptPath = string.format("Games/%s/Menu.lua", SelectedGame)
+    print(ScriptPath)
     local Loaded = Get_Script(ScriptPath)
 
     return Loaded
