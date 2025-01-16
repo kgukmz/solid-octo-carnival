@@ -27,7 +27,7 @@ local function AutoDribble(Enabled)
     DebugConsoleLog("Auto Dribble Started")
 
     repeat
-        task.wait()
+        task.wait(0.1)
 
         for _, Character in pairs(workspace:GetChildren()) do
             if (not Character:FindFirstChild("Values")) then
@@ -42,7 +42,7 @@ local function AutoDribble(Enabled)
                 continue
             end
     
-            if ((Character.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < getgenv().Studs) then
+            if ((Character.HumanoidRootPart.Position - LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 20) then
                 local Values = Character.Values
                 local Sliding = Values.Sliding
 
