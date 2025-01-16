@@ -15,6 +15,16 @@ function Main:Load(Window)
         -- // NoAnimation = true;
     })
 
+    WorldHeader:Separator({ Text = "Visuals" })
+
+    WorldHeader:Checkbox({
+        Label = "Enable Fullbright";
+        Value = false; -- // add configs
+        Callback = Removals.RemoveAmbience
+    });
+
+    WorldHeader:Separator({ Text = "World" })
+
     WorldHeader:Checkbox({
         Label = "Remove Orderly Fields";
         Value = false; -- // add configs

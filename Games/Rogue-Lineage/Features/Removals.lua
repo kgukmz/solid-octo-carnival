@@ -1,5 +1,12 @@
 local Removals = {}
 
+local Event = Get_Script("Modules/Event.lua")
+
+local Lighting = GetService("Lighting")
+
+local FullbrightConnect = Event:Create(Lighting:GetPropertyChangedSignal("Ambience"))
+local OldAmbience = nil
+
 local OrderFields = {}
 local KillbrickData = {
     Fakes = {};
@@ -91,6 +98,17 @@ function Removals:RemoveKillBricks(Value)
         for i, Killbrick in next, FakeKillbricks do
             Killbrick.Parent = nil
         end
+    end
+end
+
+function Removals:RemoveAmbience(Value)
+    if (Value == true) then
+        FullbrightConnect:Connect(function(NewValue)
+            OldAmbience = NewValue
+            Lighting.Ambience = Color3.fromRGB(255, 255, 255)
+        end)
+    elseif (Value == false) then
+        FullbrightConnect:Disconnect()
     end
 end
 

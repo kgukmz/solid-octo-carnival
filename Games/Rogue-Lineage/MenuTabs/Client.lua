@@ -15,6 +15,11 @@ function Client:Load(Window)
         Callback = Character.Reset;
     })
 
+    ButtonRow:Button({
+        Text = "Shutdown Client";
+        Callback = game.Shutdown;
+    })
+
     Tab:Separator({ Text = "CLIENT"; })
 
     Tab:Checkbox({
