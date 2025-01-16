@@ -1,5 +1,6 @@
 local GameData = Get_Script("Modules/GameData.lua")
 local SelectedGame = GameData:GetGame()
+local StartTime = tick()
 warn(SelectedGame)
 
 if (SelectedGame == nil) then
@@ -7,19 +8,17 @@ if (SelectedGame == nil) then
     return
 end
 
-print("Game data!")
-
 local Success, Menu = pcall(function()
     local ScriptPath = string.format("Games/%s/Menu.lua", SelectedGame)
-    print(ScriptPath)
     local Loaded = Get_Script(ScriptPath)
 
     return Loaded
 end)
 
 if (Success == false) then
-    warn("Script was unable to proceed:", Menu)
+    warn("Loader was unable to proceed:", Menu)
     return
 end
 
 Menu:Load()
+print("Took:", tick() - StartTime .. "s to load")
