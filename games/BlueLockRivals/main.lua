@@ -23,6 +23,8 @@ local function AutoDribble(Enabled)
     if (Enabled == false) then
         return
     end
+    
+    DebugConsoleLog("Auto Dribble Started")
 
     repeat
         task.wait()
@@ -54,6 +56,8 @@ local function AutoDribble(Enabled)
             end
         end
     until AlchemyClient.Configs.Main.AutoDribble == false
+
+     DebugConsoleLog("Auto Dribble Ended")
 end
 
 local WindowTabs = {
@@ -68,7 +72,7 @@ do -- // Main
     MainTab:Separator({ Text = "MAIN" })
 
     MainTab:Checkbox({
-        Label = "Auto-dribble";
+        Label = "Auto Dribble";
         Value = AlchemyClient.Configs.Main.AutoDribble;
         Callback = function(self, Value)
             AlchemyClient.Configs.Main.AutoDribble = Value
