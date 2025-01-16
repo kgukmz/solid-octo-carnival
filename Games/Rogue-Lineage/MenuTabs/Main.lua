@@ -21,6 +21,12 @@ function Main:Load(Window)
         Callback = Removals.RemoveOrderFields
     });
 
+    WorldHeader:Checkbox({
+        Label = "Remove Kill Bricks";
+        Value = false; -- // add configs
+        Callback = Removals.RemoveKillBricks
+    });
+
     return Tab
 end
 
