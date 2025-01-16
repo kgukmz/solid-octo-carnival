@@ -103,12 +103,18 @@ end
 
 function Removals:RemoveAmbient(Value)
     if (Value == true) then
+        Lighting.Ambient = Color3.fromRGB(255, 255, 255)
+
         FullbrightConnect:Connect(function(NewValue)
             OldAmbient = NewValue
             Lighting.Ambient = Color3.fromRGB(255, 255, 255)
         end)
     elseif (Value == false) then
         FullbrightConnect:Disconnect()
+
+        if (OldAmbient ~= nil) then
+            Lighting.Ambient = OldAmbient
+        end
     end
 end
 
