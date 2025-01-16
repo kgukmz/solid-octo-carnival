@@ -27,6 +27,4 @@ local function DirectoryRequire(Path)
 end
 
 getgenv().dRequire = DirectoryRequire
-print("laziness whispered")
-print("shaa")
 DirectoryRequire("loader.lua")
