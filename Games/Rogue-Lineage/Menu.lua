@@ -6,6 +6,13 @@ local Main = Get_Script("Games/Rogue-Lineage/MenuTabs/Main.lua")
 local Client = Get_Script("Games/Rogue-Lineage/MenuTabs/Client.lua")
 
 function Menu:Load()
+    if (getgenv().getconnections ~= nil) then
+        -- // Disable Rogues Script Context Ban
+        for i, Connection in next, getconnections(game:GetService("ScriptContext").Error) do
+            Connection:Disable()
+        end
+    end
+
     self.Library = Library
     self.Window = Library:CreateWindow({
         Title = "Alchemy | " .. identifyexecutor(),

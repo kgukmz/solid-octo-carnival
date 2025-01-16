@@ -17,6 +17,18 @@ function Client:Load(Window)
 
     Tab:Separator({ Text = "CLIENT"; })
 
+    Tab:Checkbox({
+        Label = "No Blindness";
+        Value = false; -- // add configs
+        Callback = Character.NoBlindness;
+    });
+
+    Tab:Checkbox({
+        Label = "No Blur";
+        Value = false; -- // add configs
+        Callback = Character.NoBlur;
+    });
+
     ButtonRow:Fill()
     return Tab
 end
