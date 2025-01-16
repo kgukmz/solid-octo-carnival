@@ -103,6 +103,7 @@ end
 
 function Removals:RemoveAmbient(Value)
     if (Value == true) then
+        OldAmbient = Lighting.Ambient
         Lighting.Ambient = Color3.fromRGB(255, 255, 255)
         print("Set ambient to white")
 
