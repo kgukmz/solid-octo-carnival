@@ -16,11 +16,11 @@ function Menu:Load()
 
     -- // Load tabs
     print("[ALCHEMY] Loading tabs...")
-    Main:Load(self.Window)
-    Client:Load(self.Window)
+    self.Main = Main:Load(self.Window)
+    self.Client = Client:Load(self.Window)
 
 
-    -- // self.Window:ShowTab(self.TabNameHere)
+    self.Window:ShowTab(self.Main)
     self.Window:Center()
 end
 

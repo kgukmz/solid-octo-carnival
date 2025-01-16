@@ -8,8 +8,6 @@ function Client:Load(Window)
         Visible = true;
     })
     
-    Tab:Separator({ Text = "CLIENT"; })
-
     local ButtonRow = Tab:Row()
 
     ButtonRow:Button({
@@ -17,6 +15,7 @@ function Client:Load(Window)
         Callback = Character.Reset;
     })
 
+    Tab:Separator({ Text = "CLIENT"; })
 
     ButtonRow:Fill()
     return Tab
