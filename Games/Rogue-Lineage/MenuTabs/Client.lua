@@ -2,7 +2,7 @@ local Client = {}
 
 local Character = Get_Script("Games/Rogue-Lineage/Features/Character.lua")
 
-function Main:Load(Window)
+function Client:Load(Window)
     local Tab = Window:CreateTab({
         Name = "CLIENT";
         Visible = true;
