@@ -57,7 +57,7 @@ local function AutoDribble(Enabled)
 end
 
 local WindowTabs = {
-    UIWindow:CreateTab({
+    Main = UIWindow:CreateTab({
         Name = "MAIN";
         Visible = true;
     });
