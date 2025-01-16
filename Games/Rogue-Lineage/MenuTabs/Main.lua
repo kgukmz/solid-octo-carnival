@@ -10,7 +10,7 @@ function Main:Load(Window)
 
     local WorldHeader = Tab:CollapsingHeader({
         Title = "World";
-        NoAnimation = true;
+        -- // NoAnimation = true;
     })
 
     WorldHeader:Checkbox({
