@@ -9,10 +9,15 @@ function Main:Load(Window)
     Tab:Separator({ Text = "MAIN"; })
 
     local WorldHeader = Tab:CollapsingHeader({
-        Text = "World";
+        Title = "World";
         NoAnimation = true;
         Image = "rbxassetid://6403436054";
     })
+
+    WorldHeader:Checkbox({
+        Label = "Remove Orderly Fields";
+        Value = false; -- // add configs
+    });
 
     return Tab
 end
