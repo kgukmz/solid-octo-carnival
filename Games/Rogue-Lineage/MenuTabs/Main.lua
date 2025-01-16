@@ -11,7 +11,6 @@ function Main:Load(Window)
     local WorldHeader = Tab:CollapsingHeader({
         Title = "World";
         NoAnimation = true;
-        Image = "rbxassetid://6403436054";
     })
 
     WorldHeader:Checkbox({
