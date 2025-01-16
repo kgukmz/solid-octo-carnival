@@ -18,15 +18,15 @@ function Client:Load(Window)
     Tab:Separator({ Text = "CLIENT"; })
 
     Tab:Checkbox({
-        Label = "No Blindness";
+        Label = "No Sanity [Sunken]";
         Value = false; -- // add configs
-        Callback = Character.NoBlindness;
+        Callback = Character.NoSanity;
     });
 
     Tab:Checkbox({
-        Label = "No Sanity [Sunken]";
+        Label = "No Blindness";
         Value = false; -- // add configs
-        Callback = Character.NoBlur;
+        Callback = Character.NoBlindness;
     });
 
     Tab:Checkbox({
