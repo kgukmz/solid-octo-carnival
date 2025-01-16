@@ -7,7 +7,7 @@ if (SelectedGame == nil) then
     return
 end
 
-local Success, Error = pcall(function()
+local Success, Menu = pcall(function()
     local ScriptPath = string.format("Games/%s/Menu.lua", SelectedGame)
     local Loaded = Get_Script(ScriptPath)
 
@@ -15,6 +15,8 @@ local Success, Error = pcall(function()
 end)
 
 if (Success == false) then
-    warn("Script was unable to proceed:", Error)
+    warn("Script was unable to proceed:", Menu)
     return
 end
+
+Menu:Load()

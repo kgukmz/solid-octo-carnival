@@ -1,6 +1,8 @@
 local Menu = {}
 
+print("SHA!")
 local Library = Get_Script("Modules/UI/ImGui.lua")
+print("Think abt ur game")
 
 function Menu:Load()
     self.Library = Library
