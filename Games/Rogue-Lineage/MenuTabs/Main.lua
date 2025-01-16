@@ -20,7 +20,7 @@ function Main:Load(Window)
     WorldHeader:Checkbox({
         Label = "Enable Fullbright";
         Value = false; -- // add configs
-        Callback = Removals.RemoveAmbience
+        Callback = Removals.RemoveAmbient
     });
 
     WorldHeader:Separator({ Text = "World" })
