@@ -7,4 +7,14 @@ if (SelectedGame == nil) then
     return
 end
 
-Get_Script(string.format("Games/%s/Menu.lua", SelectedGame))
+local Success, Error = pcall(function()
+    local ScriptPath = string.format("Games/%s/Menu.lua", SelectedGame)
+    local Loaded = Get_Script(ScriptPath)
+
+    return Loaded
+end)
+
+if (Success == false) then
+    warn("Script was unable to proceed:", Error)
+    return
+end
