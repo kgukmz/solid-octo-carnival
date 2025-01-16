@@ -1,3 +1,5 @@
+-- // Make a bulk require maybe (e.g GetScripts({"Dir1", "Dir2",}))
+
 if (getgenv().cloneref == nil) then
 	warn("cloneref is not supported")
 	return nil

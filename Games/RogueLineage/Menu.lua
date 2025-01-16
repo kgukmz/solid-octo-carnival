@@ -12,6 +12,9 @@ function Menu:Load()
     })
 
     -- // Load tabs
+
+    -- // self.Window:ShowTab(self.TabNameHere)
+    self.Window:Center()
 end
 
 return Menu

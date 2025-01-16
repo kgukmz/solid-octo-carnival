@@ -1,0 +1,3 @@
+local ConfigData = {}
+
+return ConfigData
