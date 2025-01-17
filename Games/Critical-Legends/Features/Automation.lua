@@ -105,10 +105,11 @@ function Automation:AutoCollectOrb()
                 continue
             end
 
-            local Hitbox = Orb:WaitForChild("HitBox", true)
-            firetouchinterest(Hitbox, HumanoidRootPart, 0)
+            local PrimaryPart = Orb.PrimaryPart
+            
+            firetouchinterest(PrimaryPart, HumanoidRootPart, 0)
             task.wait()
-            firetouchinterest(Hitbox, HumanoidRootPart, 1)
+            firetouchinterest(PrimaryPart, HumanoidRootPart, 1)
         end
     end
 
