@@ -1,6 +1,9 @@
 local GameData = Get_Script("Modules/GameData.lua")
+local Event = Get_Script("Modules/Event.lua")
+
 local SelectedGame = GameData:GetGame()
 local StartTime = tick()
+
 warn(SelectedGame)
 
 if (SelectedGame == nil) then
@@ -8,7 +11,7 @@ if (SelectedGame == nil) then
     return
 end
 
-local Success, Menu = pcall(function()
+local Success, S_Menu = pcall(function()
     local ScriptPath = string.format("Games/%s/Menu.lua", SelectedGame)
     local Loaded = Get_Script(ScriptPath)
 
@@ -20,5 +23,10 @@ if (Success == false) then
     return
 end
 
-Menu:Load()
+local Menu = S_Menu:Load()
+
+if (Menu.BindFunctions ~= nil) then
+    Event:Create(GetService("RunService").Heartbeat):Connect(Menu.BindFunctions)
+end
+
 print("Took:", tick() - StartTime .. "s to load")

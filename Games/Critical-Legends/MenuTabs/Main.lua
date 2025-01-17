@@ -70,12 +70,4 @@ function Main:Load(Window)
     return Tab
 end
 
-function Main:GetBindFunctions()
-    local Callbacks = {}
-
-    table.insert(Callbacks, Automation.AutoCollectOrb)
-
-    return Callbacks
-end
-
 return Main

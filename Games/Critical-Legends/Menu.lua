@@ -8,6 +8,9 @@ local Event = Get_Script("Modules/Event.lua")
 local Main = Get_Script("Games/Critical-Legends/MenuTabs/Main.lua")
 local Misc = Get_Script("Games/Critical-Legends/MenuTabs/Misc.lua")
 
+-- // features (find a diff way of doing this omds)
+local Automation = Get_Script("Games/Critical-Legends/Features/Automation.lua")
+
 function Menu:Load()
     -- // Reset global configs for CL (Temoprary until config system is made)
     getgenv().AutoMaterial = false
@@ -30,24 +33,12 @@ function Menu:Load()
     self.Main = Main:Load(self.Window)
     self.Misc = Misc:Load(self.Window)
 
-    -- // Load connections
-    self.Connections = {}
-    print(table.unpack(Main:GetBindFunctions()))
-    table.insert(self.Connections, table.unpack(Main:GetBindFunctions()))
-
-    Event:Create(RunService.Heartbeat):Connect(function()
-        for i, Callback in next, self.Connections do
-            if (typeof(Callback) ~= "function") then
-                print(i, Callback, type(Callback))
-                continue
-            end
-
-            Callback()
-        end
-    end)
-
     self.Window:ShowTab(self.Main)
     self.Window:Center()
+end
+
+function Menu:BindFunctions()
+    Automation:AutoCollectOrb()
 end
 
 return Menu
