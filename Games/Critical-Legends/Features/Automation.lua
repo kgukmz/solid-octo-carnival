@@ -107,6 +107,13 @@ function Automation:AutoCollectOrb()
 
             local PrimaryPart = Orb.PrimaryPart
             
+            if (PrimaryPart == nil) then
+                repeat
+                    task.wait()
+                    PrimaryPart = Orb.PrimaryPart
+                until PrimaryPart ~= nil
+            end
+            
             firetouchinterest(PrimaryPart, HumanoidRootPart, 0)
             task.wait()
             firetouchinterest(PrimaryPart, HumanoidRootPart, 1)
