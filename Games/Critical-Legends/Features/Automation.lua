@@ -10,7 +10,7 @@ function Automation:AutoUse(Value)
     -- // Temporary settings and stuff until config system is made
     repeat
         if (getgenv().IsWaiting == true) then
-            continue
+            return
         end
 
         local ActiveSelected = getgenv().ActiveSkill
@@ -18,14 +18,10 @@ function Automation:AutoUse(Value)
         local WaitInterval = getgenv().WaitInterval
     
         if (ActiveSelected == nil) then
-            break
+            return
         end
     
         if (UseWaitInterval ~= nil and UseWaitInterval == true) then
-            if (getgenv().IsWaiting == true) then
-                continue
-            end
-
             getgenv().IsWaiting = true
     
             task.delay(WaitInterval, function()
