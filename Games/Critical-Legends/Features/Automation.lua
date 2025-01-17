@@ -42,6 +42,7 @@ function Automation:AutoMaterial(Value)
         local MaterialGivers = workspace.MaterialGivers
 
         if (#MaterialTable == 0) then
+            print("No matereils")
             return
         end
 
