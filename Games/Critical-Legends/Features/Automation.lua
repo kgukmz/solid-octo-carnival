@@ -61,10 +61,6 @@ function Automation:AutoMaterial(Value)
 
                 local Giver = Model:FindFirstChild("Giver")
 
-                if (Giver == nil) then
-                    return
-                end
-
                 if (LocalPlayer.Character == nil) then
                     return
                 end
