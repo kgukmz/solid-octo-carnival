@@ -40,7 +40,7 @@ function Main:Load(Window)
     AutomationHeader:Separator({ Text = "Material Collection" })
 
     AutomationHeader:InputTextMultiline({
-        PlaceHolder = "Seperate materials with ', ', e.g 'healthy apple, rocky fruit'"
+        PlaceHolder = "Seperate materials with '/'"
     })
 
     AutomationHeader:Checkbox({

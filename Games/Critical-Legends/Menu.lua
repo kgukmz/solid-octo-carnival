@@ -4,6 +4,7 @@ local Library = Get_Script("Modules/UI/ImGui.lua")
 local Event = Get_Script("Modules/Event.lua")
 
 local Main = Get_Script("Games/Critical-Legends/MenuTabs/Main.lua")
+local Misc = Get_Script("Games/Critical-Legends/MenuTabs/Misc.lua")
 
 function Menu:Load()
     -- // Reset global configs for CL (Temoprary until config system is made)
@@ -22,6 +23,7 @@ function Menu:Load()
 
     -- // Load tabs
     self.Main = Main:Load(self.Window)
+    self.Misc = Misc:Load(self.Window)
 
     self.Window:ShowTab(self.Main)
     self.Window:Center()
