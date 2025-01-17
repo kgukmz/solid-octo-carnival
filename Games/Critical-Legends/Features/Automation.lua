@@ -7,17 +7,6 @@ function Automation:AutoUse(Value)
         return
     end
 
-    local function PressAndRelease(KeyCode)
-        local KeyCodes = {
-            [Enum.KeyCode.One] = 0x31;
-            [Enum.KeyCode.Two] = 0x32;
-            [Enum.KeyCode.Three] = 0x33;
-        }
-        
-        keypress(KeyCodes[KeyCode])
-        keyrelease(KeyCodes[KeyCode])
-    end
-
     -- // Temporary settings and stuff until config system is made
     repeat
         local ActiveSelected = getgenv().ActiveSkill
@@ -28,10 +17,7 @@ function Automation:AutoUse(Value)
             return
         end
     
-        -- // VirtualInputManager:SendKeyEvent(true, ActiveSelected)
-        -- // temp replacement idk why vim isnt workijg
-
-        PressAndRelease(ActiveSelected)
+        VirtualInputManager:SendKeyEvent(true, ActiveSelected, false, game)
 
         task.wait()
     until getgenv().AutoUseLol == false
