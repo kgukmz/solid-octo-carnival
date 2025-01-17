@@ -31,25 +31,13 @@ function Automation:AutoUse(Value)
         if (ActiveSelected == nil) then
             return
         end
-        
-        if (UseWaitInterval ~= nil) then
-            if (UseWaitInterval == false) then
-                return
-            end
-
-            getgenv().IsWaiting = true
-
-            task.delay(WaitInterval, function()
-                getgenv().IsWaiting = nil
-            end)
-        end
     
         -- // VirtualInputManager:SendKeyEvent(true, ActiveSelected)
         -- // temp replacement idk why vim isnt workijg
 
         PressAndRelease(ActiveSelected)
 
-        task.wait()
+        task.wait(0.1)
     until getgenv().AutoUseLol == false
 end
 

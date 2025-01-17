@@ -37,7 +37,7 @@ function Main:Load(Window)
         end;
     })
     
-    AutomationHeader:Separator({ Text = "Configuration" })
+    AutomationHeader:Separator({ Text = "Configuration [NOT WORKING ATM]" })
 
     AutomationHeader:Slider({
         Label = "Wait Interval";
