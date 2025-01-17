@@ -8,10 +8,12 @@ local Misc = Get_Script("Games/Critical-Legends/MenuTabs/Misc.lua")
 
 function Menu:Load()
     -- // Reset global configs for CL (Temoprary until config system is made)
+    getgenv().AutoMaterial = false
     getgenv().AutoUseLol = false
     getgenv().ActiveSkill = nil
     getgenv().UseWaitInterval = nil
     getgenv().WaitInterval = nil
+    getgenv().MaterialString = nil
 
     self.Library = Library
     self.Window = Library:CreateWindow({

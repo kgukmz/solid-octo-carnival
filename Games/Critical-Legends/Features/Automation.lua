@@ -1,6 +1,9 @@
 local Automation = {}
 
 local VirtualInputManager = GetService("VirtualInputManager")
+local Players = GetService("Players")
+
+-- // TODO: make these loops threads maybe
 
 function Automation:AutoUse(Value)
     if (Value == false) then
@@ -20,6 +23,60 @@ function Automation:AutoUse(Value)
         VirtualInputManager:SendKeyEvent(true, ActiveSelected, false, game)
         task.wait()
     until getgenv().AutoUseLol == false
+end
+
+function Automation:AutoMaterial(Value)
+    if (Value == true) then
+        return
+    end
+
+    repeat
+        if (getgenv().MaterialString == nil) then
+            return
+        end
+
+        local LocalPlayer = Players.LocalPlayer
+        local MaterialTable = string.split(getgenv().MaterialString, "/")
+        local MaterialGivers = workspace.MaterialGivers
+
+        if (#MaterialTable == 0) then
+            return
+        end
+
+        for i, Material in next, MaterialTable do
+            if (Material == "Iron") then -- // no iron support i cba rn
+                continue
+            end
+
+            local MaterialFolder = MaterialGivers:FindFirstChild(Material)
+            
+            if (MaterialFolder == nil) then
+                return
+            end
+
+            for i, Model in next, MaterialFolder:GetChildren() do
+                if (Model.ClassName ~= "Model") then
+                    continue
+                end
+
+                local Giver = Model:FindFirstChild("Giver")
+
+                if (Giver == nil) then
+                    return
+                end
+
+                if (LocalPlayer.Character == nil) then
+                    return
+                end
+
+                firetouchinterest(Giver, LocalPlayer.Character.HumanoidRootPart, 0)
+                task.wait()
+                firetouchinterest(Giver, LocalPlayer.Character.HumanoidRootPart, 0)
+            end
+        end
+
+        task.wait()
+    until getgenv().AutoMaterial == false
 end
 
 return Automation

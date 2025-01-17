@@ -40,11 +40,18 @@ function Main:Load(Window)
     AutomationHeader:Separator({ Text = "Material Collection" })
 
     AutomationHeader:InputTextMultiline({
-        PlaceHolder = "Seperate materials with '/'"
+        PlaceHolder = "Seperate materials with '/'";
+        Callback = function(self, Value)
+            getgenv().MaterialString = Value;
+        end
     })
 
     AutomationHeader:Checkbox({
         Label = "Auto Collect Materials";
+        Callback = function(self, Value)
+            getgenv().AutoMaterial = Value
+            Automation:AutoMaterial(Value)
+        end
     })
 
     return Tab
