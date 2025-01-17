@@ -33,7 +33,7 @@ function Automation:AutoUse(Value)
 
         PressAndRelease(ActiveSelected)
 
-        task.wait(0.1)
+        task.wait()
     until getgenv().AutoUseLol == false
 end
 
