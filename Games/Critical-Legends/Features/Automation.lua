@@ -29,7 +29,9 @@ function Automation:AutoUse(Value)
             end)
         end
     
-        VirtualInputManager:SendKeyEvent(true, ActiveSelected)
+        -- //VirtualInputManager:SendKeyEvent(true, ActiveSelected)
+        keypress(0x31)
+        keyrelease(0x31)
 
         task.wait()
     until getgenv().AutoUseLol == false
