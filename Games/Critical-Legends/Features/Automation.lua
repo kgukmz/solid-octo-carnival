@@ -35,14 +35,11 @@ function Automation:AutoMaterial(Value)
             return
         end
 
-        print("hell no")
-
         local LocalPlayer = Players.LocalPlayer
         local MaterialTable = string.split(getgenv().MaterialString, "/")
         local MaterialGivers = workspace.MaterialGivers
 
         if (#MaterialTable == 0) then
-            print("No matereils")
             return
         end
 
