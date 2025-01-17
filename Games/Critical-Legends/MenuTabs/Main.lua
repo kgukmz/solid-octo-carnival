@@ -20,17 +20,21 @@ function Main:Load(Window)
         Placeholder = "...";
         Label = "Skill";
         Items = {
-            ["Active 1"] = Enum.KeyCode.One;
-            ["Active 2"] = Enum.KeyCode.Two;
             ["Active 3"] = Enum.KeyCode.Three;
-        }
+            ["Active 2"] = Enum.KeyCode.Two;
+            ["Active 1"] = Enum.KeyCode.One;
+        };
+        Callback = function(self, Value)
+            print(Value, self.Items[Value])
+        end
     })
 
     AutomationHeader:Checkbox({
-        Label = "Auto Use"
+        Label = "Auto Use";
+        Callback = Automation.AutoUse;
     })
     
-    AutomationHeader:Separator()
+    AutomationHeader:Separator({ Text = "Configuration" })
 
     AutomationHeader:Slider({
         Label = "Wait Interval";
