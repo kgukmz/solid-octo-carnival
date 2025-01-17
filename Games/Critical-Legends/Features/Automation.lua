@@ -35,6 +35,8 @@ function Automation:AutoMaterial(Value)
             return
         end
 
+        print("hell no")
+        
         local LocalPlayer = Players.LocalPlayer
         local MaterialTable = string.split(getgenv().MaterialString, "/")
         local MaterialGivers = workspace.MaterialGivers
@@ -76,7 +78,6 @@ function Automation:AutoMaterial(Value)
         end
 
         task.wait()
-        print("hell no")
     until getgenv().AutoMaterial == false
 end
 
