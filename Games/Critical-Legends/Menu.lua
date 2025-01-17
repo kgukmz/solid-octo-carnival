@@ -31,7 +31,6 @@ function Menu:Load()
 
     -- // Load tabs
     self.Main = Main:Load(self.Window)
-    self.Misc = Misc:Load(self.Window)
 
     self.Window:ShowTab(self.Main)
     self.Window:Center()
