@@ -25,67 +25,56 @@ function Automation:AutoUse(Value)
     until getgenv().AutoUseLol == false
 end
 
-function Automation:AutoMaterial(Value)
-    if (Value == false) then
+function Automation:AutoMaterial()
+    if (getgenv().AutoMaterial == false) then
+        return
+    end
+    if (getgenv().MaterialString == nil) then
+        return
+    end
+    if (getgenv().MidAction2 == true) then
         return
     end
 
-    repeat
-        if (getgenv().MaterialString == nil) then
-            return
+    local LocalPlayer = Players.LocalPlayer
+    local Character = LocalPlayer.Character
+
+    if (Character == nil) then
+        return
+    end
+
+    local HumanoidRootPart = Character.HumanoidRootPart
+
+    local MaterialTable = string.split(getgenv().MaterialString, "/")
+    local MaterialGivers = workspace.MaterialGivers
+
+    getgenv().MidAction2 = true
+
+    for i, Material in next, MaterialTable do
+        if (Material == "Iron") then
+            continue
         end
 
-        local LocalPlayer = Players.LocalPlayer
-        local MaterialTable = string.split(getgenv().MaterialString, "/")
-        local MaterialGivers = workspace.MaterialGivers
+        local MaterialFolder = MaterialGivers:FindFirstChild(Material)
 
-        if (#MaterialTable == 0) then
-            return
+        if (MaterialFolder == nil) then
+            continue
         end
 
-        for i, Material in next, MaterialTable do
-            if (Material == "Iron") then -- // no iron support i cba rn
-                continue
-            end
+        for i, Model in next, MaterialFolder:GetChildren() do
+            local Giver = Model.Giver
 
-            local MaterialFolder = MaterialGivers:FindFirstChild(Material)
-            
-            if (MaterialFolder == nil) then
-                continue
-            end
-
-            for i, Model in next, MaterialFolder:GetChildren() do
-                if (Model.ClassName ~= "Model") then
-                    continue
-                end
-
-                local Giver = Model:FindFirstChild("Giver")
-
-                if (Giver == nil) then
-                    continue
-                end
-
-                if (LocalPlayer.Character == nil) then
-                    continue
-                end
-                
-                coroutine.wrap(function()
-                    firetouchinterest(Giver, LocalPlayer.Character.HumanoidRootPart, 0)
-                    task.wait()
-                    firetouchinterest(Giver, LocalPlayer.Character.HumanoidRootPart, 1)
-                end)()
-            end
+            firetouchinterest(Giver, HumanoidRootPart, 0)
+            task.wait()
+            firetouchinterest(Giver, HumanoidRootPart, 1)
         end
-
-        task.wait(0.1)
-    until getgenv().AutoMaterial == false
+    end
 end
 
 function Automation:AutoCollectOrb()
     if (getgenv().AutoCollectOrb == false) then
         return
     end
-
     if (getgenv().MidAction == true) then
         return
     end

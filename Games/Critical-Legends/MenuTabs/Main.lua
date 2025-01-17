@@ -12,7 +12,7 @@ function Main:Load(Window)
 
     local CombatHeader = Tab:CollapsingHeader({
         Title = "Combat";
-        Image = "rbxassetid://140697214772731";
+        -- // Image = "rbxassetid://140697214772731";
     })
 
     CombatHeader:Separator({ Text = "Combat"; })

@@ -37,6 +37,7 @@ end
 
 function Menu:BindFunctions()
     Automation:AutoCollectOrb()
+    Automation:AutoMaterial()
 end
 
 return Menu
