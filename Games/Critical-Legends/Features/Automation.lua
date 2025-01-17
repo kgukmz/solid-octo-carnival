@@ -33,7 +33,7 @@ function Automation:AutoUse(Value)
             end)
         end
     
-        VirtualInputManager:SendKeyEvent(true, ActiveSelected, false, nil)
+        VirtualInputManager:SendKeyEvent(true, ActiveSelected)
 
         task.wait()
     until getgenv().AutoUseLol == false
