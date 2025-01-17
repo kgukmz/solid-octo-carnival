@@ -37,7 +37,7 @@ function Menu:Load()
     self.Window:Center()
 end
 
-function Menu:BindFunctions()
+function Menu.BindFunctions()
     Automation:AutoCollectOrb()
 end
 
