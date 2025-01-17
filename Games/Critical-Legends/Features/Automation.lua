@@ -61,13 +61,17 @@ function Automation:AutoMaterial(Value)
 
                 local Giver = Model:FindFirstChild("Giver")
 
+                if (Giver == nil) then
+                    continue
+                end
+
                 if (LocalPlayer.Character == nil) then
-                    return
+                    continue
                 end
 
                 firetouchinterest(Giver, LocalPlayer.Character.HumanoidRootPart, 0)
-                task.wait(0.1)
-                firetouchinterest(Giver, LocalPlayer.Character.HumanoidRootPart, 0)
+                task.wait()
+                firetouchinterest(Giver, LocalPlayer.Character.HumanoidRootPart, 1)
             end
         end
 
