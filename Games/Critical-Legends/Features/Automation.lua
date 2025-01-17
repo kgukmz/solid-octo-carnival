@@ -36,7 +36,7 @@ function Automation:AutoMaterial(Value)
         end
 
         print("hell no")
-        
+
         local LocalPlayer = Players.LocalPlayer
         local MaterialTable = string.split(getgenv().MaterialString, "/")
         local MaterialGivers = workspace.MaterialGivers
@@ -70,10 +70,12 @@ function Automation:AutoMaterial(Value)
                 if (LocalPlayer.Character == nil) then
                     continue
                 end
-
-                firetouchinterest(Giver, LocalPlayer.Character.HumanoidRootPart, 0)
-                task.wait()
-                firetouchinterest(Giver, LocalPlayer.Character.HumanoidRootPart, 1)
+                
+                coroutine.wrap(function()
+                    firetouchinterest(Giver, LocalPlayer.Character.HumanoidRootPart, 0)
+                    task.wait()
+                    firetouchinterest(Giver, LocalPlayer.Character.HumanoidRootPart, 1)
+                end)()
             end
         end
 
