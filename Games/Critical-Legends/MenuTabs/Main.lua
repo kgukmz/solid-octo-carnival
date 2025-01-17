@@ -37,23 +37,14 @@ function Main:Load(Window)
         end;
     })
     
-    AutomationHeader:Separator({ Text = "Configuration [NOT WORKING ATM]" })
+    AutomationHeader:Separator({ Text = "Material Collection" })
 
-    AutomationHeader:Slider({
-        Label = "Wait Interval";
-        Value = 1;
-        MinValue = 1;
-        MaxValue = 10;
-        Callback = function(self, Value)
-            getgenv().WaitInterval = Value
-        end
+    AutomationHeader:InputTextMultiline({
+        PlaceHolder = "Seperate materials with ', ', e.g 'healthy apple, rocky fruit'"
     })
 
     AutomationHeader:Checkbox({
-        Label = "Wait Interval";
-        Callback = function(self, Value)
-            getgenv().UseWaitInterval = Value 
-        end
+        Label = "Auto Collect Materials";
     })
 
     return Tab
