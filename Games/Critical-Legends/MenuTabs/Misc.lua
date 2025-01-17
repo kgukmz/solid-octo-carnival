@@ -8,9 +8,6 @@ function Misc:Load(Window)
 
     Tab:Image({
         Image = 140697214772731;
-	    Ratio = 16 / 9;
-	    AspectType = Enum.AspectType.FitWithinMaxSize;
-	    Size = UDim2.fromScale(1, 1);
     })
 end
 

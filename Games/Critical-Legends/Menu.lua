@@ -27,6 +27,9 @@ function Menu:Load()
     self.Main = Main:Load(self.Window)
     self.Misc = Misc:Load(self.Window)
 
+    -- // Load connections
+    self.Connections = {}
+
     self.Window:ShowTab(self.Main)
     self.Window:Center()
 end
