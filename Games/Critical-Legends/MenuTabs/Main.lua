@@ -25,13 +25,16 @@ function Main:Load(Window)
             ["Active 1"] = Enum.KeyCode.One;
         };
         Callback = function(self, Value)
-            print(Value, self.Items[Value])
+            getgenv().ActiveSkill = Value
         end
     })
 
     AutomationHeader:Checkbox({
         Label = "Auto Use";
-        Callback = Automation.AutoUse;
+        Callback = function(self, Value)
+            getgenv().AutoUseLol = Value
+            Automation:AutoUse(Value)
+        end;
     })
     
     AutomationHeader:Separator({ Text = "Configuration" })
@@ -41,10 +44,16 @@ function Main:Load(Window)
         Value = 1;
         MinValue = 1;
         MaxValue = 10;
+        Callback = function(self, Value)
+            getgenv().WaitInterval = Value
+        end
     })
 
     AutomationHeader:Checkbox({
         Label = "Wait Interval";
+        Callback = function(self, Value)
+            getgenv().UseWaitInterval = Value 
+        end
     })
 
     return Tab

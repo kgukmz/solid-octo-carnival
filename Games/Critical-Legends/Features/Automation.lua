@@ -7,28 +7,36 @@ function Automation:AutoUse(Value)
         return
     end
 
-    if (getgenv().IsWaiting == true) then
-        return
-    end
+    -- // Temporary settings and stuff until config system is made
+    repeat
+        if (getgenv().IsWaiting == true) then
+            continue
+        end
 
-    -- // Temporary settings until config system is made
-    local ActiveSelected = getgenv().ActiveSkill
-    local UseWaitInterval = getgenv().UseWaitInterval
-    local WaitInterval = getgenv().WaitInterval
+        local ActiveSelected = getgenv().ActiveSkill
+        local UseWaitInterval = getgenv().UseWaitInterval
+        local WaitInterval = getgenv().WaitInterval
+    
+        if (ActiveSelected == nil) then
+            break
+        end
+    
+        if (UseWaitInterval ~= nil and UseWaitInterval == true) then
+            if (getgenv().IsWaiting == true) then
+                continue
+            end
 
-    if (ActiveSelected == nil) then
-        return
-    end
+            getgenv().IsWaiting = true
+    
+            task.delay(WaitInterval, function()
+                getgenv().IsWaiting = nil
+            end)
+        end
+    
+        VirtualInputManager:SendKeyEvent(true, ActiveSelected, false, nil)
 
-    if (UseWaitInterval ~= nil and UseWaitInterval == true) then
-        getgenv().IsWaiting = true
-
-        task.delay(WaitInterval, function()
-            getgenv().IsWaiting = nil
-        end)
-    end
-
-    VirtualInputManager:SendKeyEvent(true, ActiveSelected, false, nil)
+        task.wait()
+    until getgenv().AutoUseLol == false
 end
 
 return Automation
