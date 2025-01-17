@@ -11,7 +11,7 @@ if (SelectedGame == nil) then
     return
 end
 
-local Success, S_Menu = pcall(function()
+local Success, GetMenu = pcall(function()
     local ScriptPath = string.format("Games/%s/Menu.lua", SelectedGame)
     local Loaded = Get_Script(ScriptPath)
 
@@ -23,9 +23,8 @@ if (Success == false) then
     return
 end
 
-local Menu = S_Menu:Load()
+local Menu = GetMenu:Load()
 
-table.foreach(Menu, warn)
 if (Menu.BindFunctions ~= nil) then
     Event:Create(GetService("RunService").Heartbeat):Connect(Menu.BindFunctions)
 end

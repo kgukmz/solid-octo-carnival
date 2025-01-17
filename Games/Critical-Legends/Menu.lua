@@ -36,6 +36,7 @@ function Menu:Load()
     self.Window:ShowTab(self.Main)
     self.Window:Center()
 
+    print("Where have you been?")
     return Menu
 end
 
