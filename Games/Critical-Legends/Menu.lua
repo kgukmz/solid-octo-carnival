@@ -35,9 +35,11 @@ function Menu:Load()
 
     self.Window:ShowTab(self.Main)
     self.Window:Center()
+
+    return Menu
 end
 
-function Menu.BindFunctions()
+function Menu:BindFunctions()
     Automation:AutoCollectOrb()
 end
 
