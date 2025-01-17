@@ -8,8 +8,14 @@ local Client = Get_Script("Games/Rogue-Lineage/MenuTabs/Client.lua")
 function Menu:Load()
     if (getgenv().getconnections ~= nil) then
         -- // Disable Rogues Script Context Ban
-        for i, Connection in next, getconnections(game:GetService("ScriptContext").Error) do
-            Connection:Disable()
+        local Success, Error = pcall(function()
+            for i, Connection in next, getconnections(game:GetService("ScriptContext").Error) do
+                Connection:Disable()
+            end
+        end)
+
+        if (Success == false) then
+            warn("[ALCHEMY] Error disabling script context connections:", Error)
         end
     end
 
