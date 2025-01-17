@@ -32,6 +32,7 @@ function Menu:Load()
 
     -- // Load connections
     self.Connections = {}
+    print(table.unpack(Main:GetBindFunctions()))
     table.insert(self.Connections, table.unpack(Main:GetBindFunctions()))
 
     Event:Create(RunService.Heartbeat):Connect(function()
