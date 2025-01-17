@@ -35,6 +35,8 @@ function Automation:AutoMaterial(Value)
             return
         end
 
+        print("hell no")
+
         local LocalPlayer = Players.LocalPlayer
         local MaterialTable = string.split(getgenv().MaterialString, "/")
         local MaterialGivers = workspace.MaterialGivers
@@ -51,7 +53,7 @@ function Automation:AutoMaterial(Value)
             local MaterialFolder = MaterialGivers:FindFirstChild(Material)
             
             if (MaterialFolder == nil) then
-                return
+                continue
             end
 
             for i, Model in next, MaterialFolder:GetChildren() do
