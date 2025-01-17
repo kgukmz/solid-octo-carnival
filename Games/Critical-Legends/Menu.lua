@@ -36,6 +36,11 @@ function Menu:Load()
 
     Event:Create(RunService.Heartbeat):Connect(function()
         for i, Callback in next, self.Connections do
+            if (typeof(Callback) ~= "function") then
+                print(i, Callback, type(Callback))
+                continue
+            end
+
             Callback()
         end
     end)
