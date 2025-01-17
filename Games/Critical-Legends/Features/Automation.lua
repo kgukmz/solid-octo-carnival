@@ -26,7 +26,7 @@ function Automation:AutoUse(Value)
 end
 
 function Automation:AutoMaterial(Value)
-    if (Value == true) then
+    if (Value == false) then
         return
     end
 
