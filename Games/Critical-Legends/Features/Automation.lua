@@ -31,10 +31,7 @@ function Automation:AutoUse(Value)
         -- // VirtualInputManager:SendKeyEvent(true, ActiveSelected)
         -- // temp replacement idk why vim isnt workijg
 
-        for i = 1, 5 do -- // oh no boii
-            task.wait()
-            PressAndRelease(ActiveSelected)
-        end
+        PressAndRelease(ActiveSelected)
 
         task.wait()
     until getgenv().AutoUseLol == false
