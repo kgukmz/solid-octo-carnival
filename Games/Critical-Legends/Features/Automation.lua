@@ -32,18 +32,14 @@ function Automation:AutoMaterial(Value)
 
     repeat
         if (getgenv().MaterialString == nil) then
-            print("YO2")
             return
         end
-
-        print("hell no")
 
         local LocalPlayer = Players.LocalPlayer
         local MaterialTable = string.split(getgenv().MaterialString, "/")
         local MaterialGivers = workspace.MaterialGivers
 
         if (#MaterialTable == 0) then
-            print("YO")
             return
         end
 
@@ -55,7 +51,6 @@ function Automation:AutoMaterial(Value)
             local MaterialFolder = MaterialGivers:FindFirstChild(Material)
             
             if (MaterialFolder == nil) then
-                print("Y4O")
                 return
             end
 
@@ -67,12 +62,10 @@ function Automation:AutoMaterial(Value)
                 local Giver = Model:FindFirstChild("Giver")
 
                 if (Giver == nil) then
-                    print("YO2")
                     continue
                 end
 
                 if (LocalPlayer.Character == nil) then
-                    print("YO1")
                     continue
                 end
                 
@@ -84,7 +77,7 @@ function Automation:AutoMaterial(Value)
             end
         end
 
-        task.wait()
+        task.wait(0.1)
     until getgenv().AutoMaterial == false
 end
 
