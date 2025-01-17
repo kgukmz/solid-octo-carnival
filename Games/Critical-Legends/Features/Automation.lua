@@ -61,11 +61,11 @@ function Automation:AutoMaterial()
         end
 
         for i, Model in next, MaterialFolder:GetChildren() do
-            local Giver = Model.Giver
+            local MaterialGiver = Model.Giver
 
-            firetouchinterest(Giver, HumanoidRootPart, 0)
+            firetouchinterest(MaterialGiver, HumanoidRootPart, 0)
             task.wait()
-            firetouchinterest(Giver, HumanoidRootPart, 1)
+            firetouchinterest(MaterialGiver, HumanoidRootPart, 1)
         end
     end
 
