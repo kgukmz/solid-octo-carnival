@@ -18,6 +18,9 @@ function Main:Load(Window)
 
     CombatHeader:Checkbox({
         Label = "Auto Collect Orbs";
+        Callback = function(self, Value)
+            getgenv().AutoCollectOrb = Value
+        end
     })
 
     local AutomationHeader = Tab:CollapsingHeader({
@@ -65,6 +68,14 @@ function Main:Load(Window)
     })
 
     return Tab
+end
+
+function Main:GetBindFunctions()
+    local Callbacks = {}
+
+    table.insert(Callbacks, Automation.AutoCollectOrb)
+
+    return Callbacks
 end
 
 return Main

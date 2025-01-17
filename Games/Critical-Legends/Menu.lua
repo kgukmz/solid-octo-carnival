@@ -1,5 +1,7 @@
 local Menu = {}
 
+local RunService = GetService("RunService")
+
 local Library = Get_Script("Modules/UI/ImGui.lua")
 local Event = Get_Script("Modules/Event.lua")
 
@@ -14,6 +16,7 @@ function Menu:Load()
     getgenv().UseWaitInterval = nil
     getgenv().WaitInterval = nil
     getgenv().MaterialString = nil
+    getgenv().AutoCollectOrb = nil
 
     self.Library = Library
     self.Window = Library:CreateWindow({
@@ -29,6 +32,13 @@ function Menu:Load()
 
     -- // Load connections
     self.Connections = {}
+    table.insert(self.Connections, Main:GetBindFunctions())
+
+    Event:Create(RunService.Heartbeat):Connect(function()
+        for i, Callback in next, self.Connections do
+            Callback()
+        end
+    end)
 
     self.Window:ShowTab(self.Main)
     self.Window:Center()
