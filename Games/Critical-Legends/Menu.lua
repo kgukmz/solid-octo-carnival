@@ -6,6 +6,12 @@ local Event = Get_Script("Modules/Event.lua")
 local Main = Get_Script("Games/Critical-Legends/MenuTabs/Main.lua")
 
 function Menu:Load()
+    -- // Reset global configs for CL (Temoprary until config system is made)
+    getgenv().AutoUseLol = false
+    getgenv().ActiveSkill = nil
+    getgenv().UseWaitInterval = nil
+    getgenv().WaitInterval = nil
+
     self.Library = Library
     self.Window = Library:CreateWindow({
         Title = "Alchemy | " .. identifyexecutor(),

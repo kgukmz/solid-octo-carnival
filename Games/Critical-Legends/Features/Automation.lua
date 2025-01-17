@@ -20,10 +20,6 @@ function Automation:AutoUse(Value)
 
     -- // Temporary settings and stuff until config system is made
     repeat
-        if (getgenv().IsWaiting == true) then
-            return
-        end
-
         local ActiveSelected = getgenv().ActiveSkill
         local UseWaitInterval = getgenv().UseWaitInterval
         local WaitInterval = getgenv().WaitInterval
