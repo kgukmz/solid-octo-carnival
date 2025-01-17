@@ -7,6 +7,17 @@ function Automation:AutoUse(Value)
         return
     end
 
+    local function PressAndRelease(KeyCode)
+        local KeyCodes = {
+            [Enum.KeyCode.One] = 0x31;
+            [Enum.KeyCode.Two] = 0x32;
+            [Enum.KeyCode.Three] = 0x33;
+        }
+        
+        keypress(KeyCodes[KeyCode])
+        keyrelease(KeyCodes[KeyCode])
+    end
+
     -- // Temporary settings and stuff until config system is made
     repeat
         if (getgenv().IsWaiting == true) then
@@ -20,7 +31,8 @@ function Automation:AutoUse(Value)
         if (ActiveSelected == nil) then
             return
         end
-    
+        
+        --[[
         if (UseWaitInterval ~= nil and UseWaitInterval == true) then
             getgenv().IsWaiting = true
     
@@ -28,12 +40,14 @@ function Automation:AutoUse(Value)
                 getgenv().IsWaiting = nil
             end)
         end
+        --]]
     
-        -- //VirtualInputManager:SendKeyEvent(true, ActiveSelected)
-        keypress(0x31)
-        keyrelease(0x31)
+        -- // VirtualInputManager:SendKeyEvent(true, ActiveSelected)
+        -- // temp replacement idk why vim isnt workijg
 
-        task.wait()
+        PressAndRelease(ActiveSelected)
+
+        task.wait(WaitInterval ~= nil and WaitInterval or 0.1)
     until getgenv().AutoUseLol == false
 end
 
