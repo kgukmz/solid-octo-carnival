@@ -6,7 +6,6 @@ local Library = Get_Script("Modules/UI/ImGui.lua")
 local Event = Get_Script("Modules/Event.lua")
 
 local Main = Get_Script("Games/Critical-Legends/MenuTabs/Main.lua")
-local Misc = Get_Script("Games/Critical-Legends/MenuTabs/Misc.lua")
 
 -- // features (find a diff way of doing this omds)
 local Automation = Get_Script("Games/Critical-Legends/Features/Automation.lua")
