@@ -25,6 +25,7 @@ end
 
 local Menu = S_Menu:Load()
 
+table.foreach(Menu, warn)
 if (Menu.BindFunctions ~= nil) then
     Event:Create(GetService("RunService").Heartbeat):Connect(Menu.BindFunctions)
 end
