@@ -16,10 +16,8 @@ function Automation:AutoUse(Value)
         if (ActiveSelected == nil) then
             return
         end
-    
-        local Part = Instance.new("Part")
-        VirtualInputManager:SendKeyEvent(true, ActiveSelected, false, Part)
-        Part:Destroy()
+
+        VirtualInputManager:SendKeyEvent(true, ActiveSelected, false, game)
         task.wait()
     until getgenv().AutoUseLol == false
 end
