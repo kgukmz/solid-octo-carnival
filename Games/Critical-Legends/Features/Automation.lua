@@ -81,4 +81,48 @@ function Automation:AutoMaterial(Value)
     until getgenv().AutoMaterial == false
 end
 
+function Automation:AutoCollectOrb()
+    if (getgenv().AutoCollectOrb == false) then
+        return
+    end
+
+    if (getgenv().MidAction == true) then
+        return
+    end
+
+    if (workspace:FindFirstChild("CombatFolder") == nil) then
+        return
+    end
+
+    local LocalPlayer = Players.LocalPlayer
+    local Character = LocalPlayer.Character
+    local HumanoidRootPart = Character.HumanoidRootPart
+    
+    local CombatFolder = workspace.CombatFolder
+    local PlayerFolder = CombatFolder:FindFirstChild(LocalPlayer.Name)
+
+    if (PlayerFolder == nil) then
+        return
+    end
+
+    local ActionOrbs = PlayerFolder:GetChildren()
+
+    if (#ActionOrbs > 0) then
+        getgenv().MidAction = true
+    
+        for i, Orb in next, ActionOrbs do
+            if (Orb.ClassName ~= "Model") then
+                continue
+            end
+
+            local Hitbox = Orb.HitBox
+            firetouchinterest(Hitbox, HumanoidRootPart, 0)
+            task.wait()
+            firetouchinterest(Hitbox, HumanoidRootPart, 1)
+        end
+    end
+
+    getgenv().MidAction = false
+end
+
 return Automation

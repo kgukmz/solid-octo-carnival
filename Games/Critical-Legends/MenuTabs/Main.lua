@@ -10,6 +10,16 @@ function Main:Load(Window)
     
     Tab:Separator({ Text = "MAIN"; })
 
+    local CombatHeader = Tab:CollapsingHeader({
+        Title = "Combat";
+    })
+
+    CombatHeader:Separator({ Text = "Combat"; })
+
+    CombatHeader:Checkbox({
+        Label = "Auto Collect Orbs";
+    })
+
     local AutomationHeader = Tab:CollapsingHeader({
         Title = "Automation";
     })
