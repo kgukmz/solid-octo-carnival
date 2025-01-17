@@ -1,0 +1,3 @@
+local Automation = {}
+
+return Automation

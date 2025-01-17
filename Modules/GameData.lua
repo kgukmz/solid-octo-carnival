@@ -1,6 +1,7 @@
 local GameData = {
     [4483381587] = "LiteralBaseplate";
     [5208655184] = "Rogue-Lineage";
+    [8619263259] = "Critical-Legends"
 }
 
 function GameData:GetGame()
