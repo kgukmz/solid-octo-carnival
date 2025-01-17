@@ -38,12 +38,11 @@ function Automation:AutoMaterial()
 
     local LocalPlayer = Players.LocalPlayer
     local Character = LocalPlayer.Character
+    local HumanoidRootPart = Character.HumanoidRootPart
 
-    if (Character == nil) then
+    if (Character == nil or HumanoidRootPart == nil) then
         return
     end
-
-    local HumanoidRootPart = Character.HumanoidRootPart
 
     local MaterialTable = string.split(getgenv().MaterialString, "/")
     local MaterialGivers = workspace.MaterialGivers
@@ -69,6 +68,8 @@ function Automation:AutoMaterial()
             firetouchinterest(Giver, HumanoidRootPart, 1)
         end
     end
+
+    getgenv().MidAction2 = false
 end
 
 function Automation:AutoCollectOrb()
