@@ -3,7 +3,6 @@ local Menu = {}
 local RunService = GetService("RunService")
 
 local Library = Get_Script("Modules/UI/ImGui.lua")
-local Event = Get_Script("Modules/Event.lua")
 
 local Main = Get_Script("Games/Critical-Legends/MenuTabs/Main.lua")
 
