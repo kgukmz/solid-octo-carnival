@@ -70,12 +70,13 @@ function Automation:AutoMaterial(Value)
                 end
 
                 firetouchinterest(Giver, LocalPlayer.Character.HumanoidRootPart, 0)
-                task.wait()
+                task.wait(0.1)
                 firetouchinterest(Giver, LocalPlayer.Character.HumanoidRootPart, 0)
             end
         end
 
         task.wait()
+        print("hell no")
     until getgenv().AutoMaterial == false
 end
 
