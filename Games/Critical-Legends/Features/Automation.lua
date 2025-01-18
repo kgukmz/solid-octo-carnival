@@ -76,9 +76,6 @@ function Automation:AutoCollectOrb()
     if (getgenv().AutoCollectOrb == false) then
         return
     end
-    if (getgenv().MidAction == true) then
-        return
-    end
 
     local LocalPlayer = Players.LocalPlayer
     local Character = LocalPlayer.Character
@@ -89,18 +86,19 @@ function Automation:AutoCollectOrb()
     if (CombatFolder == nil) then
         return
     end
+    if (Character == nil or HumanoidRootPart == nil) then
+        return
+    end
 
     local PlayerFolder = CombatFolder:FindFirstChild(LocalPlayer.Name)
     local FolderContents = PlayerFolder:GetChildren()
-       
-    for i, Orb in next, FolderContents do
-        local PrimaryPart = Orb:WaitForChild("HitBox", true)
-            
-        firetouchinterest(PrimaryPart, HumanoidRootPart, 0)
-        firetouchinterest(PrimaryPart, HumanoidRootPart, 1)
-    end
 
-    getgenv().MidAction = false
+    for i, Orb in next, FolderContents do
+        local OrbHitbox = Orb:WaitForChild("HitBox", true)
+        print("Yo!")
+        firetouchinterest(OrbHitbox, HumanoidRootPart, 0)
+        firetouchinterest(OrbHitbox, HumanoidRootPart, 1)
+    end
 end
 
 function Automation:OrbHitboxExpand()
