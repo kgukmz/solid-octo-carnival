@@ -85,11 +85,9 @@ function Automation:AutoCollectOrb()
     local CombatFolder = workspace:FindFirstChild("CombatFolder")
 
     if (CombatFolder == nil) then
-        print("Im a shapeshifter")
         return
     end
     if (Character == nil or HumanoidRootPart == nil) then
-        print("at poes masquerade")
         return
     end
 
@@ -98,7 +96,7 @@ function Automation:AutoCollectOrb()
 
     for i, Orb in next, FolderContents do
         local OrbHitbox = Orb:WaitForChild("HitBox", true)
-        print("Yo!")
+
         firetouchinterest(OrbHitbox, HumanoidRootPart, 0)
         firetouchinterest(OrbHitbox, HumanoidRootPart, 1)
     end
