@@ -153,7 +153,31 @@ function Automation:OrbHitboxExpand()
             until HitBox ~= nil
         end
 
-        HitBox.Size = Vector3.new(1, 1, 1) * 500
+        HitBox.Size = Vector3.new(1, 1, 1) * 1000
+    end
+end
+
+function Automation:TeleportOrbs()
+    if (getgenv().TeleportOrbs == false) then
+        return
+    end
+
+    local LocalPlayer = Players.LocalPlayer
+    local Character = LocalPlayer.Character
+
+    if (Character == nil) then
+        return
+    end
+
+    local HumanoidRootPart = Character.HumanoidRootPart
+
+    local CombatFolder = workspace:WaitForChild("CombatFolder", true)
+    local PlayerFolder = CombatFolder:WaitForChild(LocalPlayer.Name, true)
+    
+    local FolderContents = PlayerFolder:GetChildren()
+
+    for i, Orb in next, FolderContents do
+        Orb:SetPrimaryPartCFrame(HumanoidRootPart.CFrame)
     end
 end
 

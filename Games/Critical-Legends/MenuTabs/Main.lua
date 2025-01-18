@@ -18,6 +18,13 @@ function Main:Load(Window)
     CombatHeader:Separator({ Text = "Combat"; })
 
     CombatHeader:Checkbox({
+        Label = "Teleport Orbs";
+        Callback = function(self, Value)
+            getgenv().TeleportOrbs = Value
+        end
+    })
+
+    CombatHeader:Checkbox({
         Label = "Expand Orb Hitboxes";
         Callback = function(self, Value)
             getgenv().OrbHitboxExpand = Value

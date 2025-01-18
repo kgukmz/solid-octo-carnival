@@ -11,6 +11,7 @@ local Automation = Get_Script("Games/Critical-Legends/Features/Automation.lua")
 function Menu:Load()
     -- // Reset global configs for CL (Temoprary until config system is made)
     getgenv().AutoMaterial = false
+    getgenv().TeleportOrbs = false
     getgenv().OrbHitboxExpand = false
     getgenv().AutoUseLol = false
     getgenv().ActiveSkill = nil
@@ -41,6 +42,7 @@ end
 function Menu:BindFunctions()
     Automation:AutoMaterial()
     Automation:OrbHitboxExpand()
+    Automation:TeleportOrbs()
 end
 
 return Menu
