@@ -22,24 +22,27 @@ function Client:Load(Window)
 
     Tab:Separator({ Text = "CLIENT"; })
 
-    Tab:Checkbox({
-        Label = "No Sanity [Sunken]";
+    local CheckboxRow = Tab:Row()
+
+    CheckboxRow:Checkbox({
+        Label = "No Sanity";
         Value = false; -- // add configs
-        Callback = Character.NoSanity;
+        Callback = Character.NoShadows;
     });
 
-    Tab:Checkbox({
-        Label = "No Blindness";
+    CheckboxRow:Checkbox({
+        Label = "No Blind";
         Value = false; -- // add configs
         Callback = Character.NoBlindness;
     });
 
-    Tab:Checkbox({
+    CheckboxRow:Checkbox({
         Label = "No Blur";
         Value = false; -- // add configs
         Callback = Character.NoBlur;
     });
 
+    CheckboxRow:Fill()
     ButtonRow:Fill()
     return Tab
 end

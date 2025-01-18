@@ -30,4 +30,8 @@ function Character:NoSanity(Value)
     Sanity.Enabled = not Value
 end
 
+function Character:NoShadows(Value)
+    Lighting.GlobalShadows = not Value
+end
+
 return Character
