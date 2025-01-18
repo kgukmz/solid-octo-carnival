@@ -25,9 +25,15 @@ function Client:Load(Window)
     local CheckboxRow = Tab:Row()
 
     CheckboxRow:Checkbox({
-        Label = "No Sanity";
+        Label = "No Shadows";
         Value = false; -- // add configs
         Callback = Character.NoShadows;
+    });
+
+    CheckboxRow:Checkbox({
+        Label = "No Sanity";
+        Value = false; -- // add configs
+        Callback = Character.NoSanity;
     });
 
     CheckboxRow:Checkbox({
