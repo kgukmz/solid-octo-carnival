@@ -186,7 +186,14 @@ function Automation:TeleportOrbs()
     local FolderContents = PlayerFolder:GetChildren()
 
     for i, Orb in next, FolderContents do
-        Orb:SetPrimaryPartCFrame(HumanoidRootPart.CFrame)
+        if (Orb.PrimaryPart == nil) then
+            repeat
+                task.wait()
+                PrimaryPart = Orb.PrimaryPart
+            until PrimaryPart ~= nil 
+        end
+
+        pcall(Orb.SetPrimaryPartCFrame, Orb, HumanoidRootPart.CFrame)
     end
 end
 
