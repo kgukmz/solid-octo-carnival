@@ -80,44 +80,24 @@ function Automation:AutoCollectOrb()
         return
     end
 
-    if (workspace:FindFirstChild("CombatFolder") == nil) then
-        return
-    end
-
     local LocalPlayer = Players.LocalPlayer
     local Character = LocalPlayer.Character
     local HumanoidRootPart = Character.HumanoidRootPart
     
-    local CombatFolder = workspace.CombatFolder
-    local PlayerFolder = CombatFolder:FindFirstChild(LocalPlayer.Name)
+    local CombatFolder = workspace:FindFirstChild("CombatFolder")
 
-    if (PlayerFolder == nil) then
+    if (CombatFolder == nil) then
         return
     end
 
-    local ActionOrbs = PlayerFolder:GetChildren()
-
-    if (#ActionOrbs > 0) then
-        getgenv().MidAction = true
-    
-        for i, Orb in next, ActionOrbs do
-            if (Orb.ClassName ~= "Model") then
-                continue
-            end
-
-            local PrimaryPart = Orb.PrimaryPart
+    local PlayerFolder = CombatFolder:FindFirstChild(LocalPlayer.Name)
+    local FolderContents = PlayerFolder:GetChildren()
+       
+    for i, Orb in next, FolderContents do
+        local PrimaryPart = Orb:WaitForChild("HitBox", true)
             
-            if (PrimaryPart == nil) then
-                repeat
-                    task.wait()
-                    PrimaryPart = Orb.PrimaryPart
-                until PrimaryPart ~= nil
-            end
-            
-            firetouchinterest(PrimaryPart, HumanoidRootPart, 0)
-            task.wait()
-            firetouchinterest(PrimaryPart, HumanoidRootPart, 1)
-        end
+        firetouchinterest(PrimaryPart, HumanoidRootPart, 0)
+        firetouchinterest(PrimaryPart, HumanoidRootPart, 1)
     end
 
     getgenv().MidAction = false
