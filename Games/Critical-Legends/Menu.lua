@@ -3,6 +3,7 @@ local Menu = {}
 local Library = Get_Script("Modules/UI/ImGui.lua")
 
 local Main = Get_Script("Games/Critical-Legends/MenuTabs/Main.lua")
+local Client = Get_Script("Games/Critical-Legends/MenuTabs/Client.lua")
 
 -- // features (find a diff way of doing this omds)
 local Automation = Get_Script("Games/Critical-Legends/Features/Automation.lua")
@@ -28,6 +29,7 @@ function Menu:Load()
 
     -- // Load tabs
     self.Main = Main:Load(self.Window)
+    self.Client = Client:Load(self.Window)
 
     self.Window:ShowTab(self.Main)
     self.Window:Center()
