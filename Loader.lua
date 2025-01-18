@@ -25,8 +25,28 @@ end
 
 local Menu = GetMenu:Load()
 
-if (Menu.BindFunctions ~= nil) then
-    Event:Create(GetService("RunService").Heartbeat):Connect(Menu.BindFunctions)
-end
+local Succes, Error = pcall(function()
+    local a = true
+    
+    for i, Item in next, Menu do
+        if (typeof(Item) ~= "function") then
+            continue
+        end
+
+        local Info = debug.getinfo(Item)
+
+        if (Info.name == "BindFunctions") then
+            a = true
+            break
+        end
+    end
+
+    if (a == true) then
+        return
+    end
+    
+    local NewEvent = Event:Create(GetService("RunService").Heartbeat)
+    NewEvent:Connect(Menu.BindFunctions)
+end)
 
 print("Took:", tick() - StartTime .. "s to load")
