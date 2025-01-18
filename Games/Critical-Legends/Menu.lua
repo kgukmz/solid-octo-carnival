@@ -37,7 +37,6 @@ function Menu:Load()
 end
 
 function Menu:BindFunctions()
-    Automation:AutoCollectOrb()
     Automation:AutoMaterial()
     Automation:OrbHitboxExpand()
 end
