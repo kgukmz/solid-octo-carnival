@@ -123,4 +123,38 @@ function Automation:AutoCollectOrb()
     getgenv().MidAction = false
 end
 
+function Automation:OrbHitboxExpand()
+    if (getgenv().OrbHitboxExpand == false) then
+        return
+    end
+
+    local CombatFolder = workspace:FindFirstChild("CombatFolder")
+    local LocalPlayer = Players.LocalPlayer
+
+    if (CombatFolder == nil) then
+        return
+    end
+
+    local PlayerCombatFolder = CombatFolder:FindFirstChild(LocalPlayer.Name)
+
+    if (PlayerCombatFolder == nil) then
+        return
+    end
+
+    local FolderContents = PlayerCombatFolder:GetChildren()
+
+    for i, Orb in next, FolderContents do
+        local HitBox = Orb:FindFirstChild("HitBox")
+        
+        if (HitBox == nil) then
+            repeat
+                task.wait()
+                HitBox = Orb:FindFirstChild("HitBox")
+            until HitBox ~= nil
+        end
+
+        HitBox.Size = Vector3.new(1, 1, 1) * 500
+    end
+end
+
 return Automation

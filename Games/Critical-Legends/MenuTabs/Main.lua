@@ -24,6 +24,13 @@ function Main:Load(Window)
         end
     })
 
+    CombatHeader:Checkbox({
+        Label = "Expand Orb Hitboxes";
+        Callback = function(self, Value)
+            getgenv().OrbHitboxExpand = Value
+        end
+    })
+
     local AutomationHeader = Tab:CollapsingHeader({
         Title = "Automation";
     })
