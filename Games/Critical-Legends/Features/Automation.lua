@@ -74,6 +74,7 @@ end
 
 function Automation:AutoCollectOrb()
     if (getgenv().AutoCollectOrb == false) then
+        print("Where hav i been?")
         return
     end
 
@@ -84,9 +85,11 @@ function Automation:AutoCollectOrb()
     local CombatFolder = workspace:FindFirstChild("CombatFolder")
 
     if (CombatFolder == nil) then
+        print("Im a shapeshifter")
         return
     end
     if (Character == nil or HumanoidRootPart == nil) then
+        print("at poes masquerade")
         return
     end
 

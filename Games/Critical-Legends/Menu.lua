@@ -13,12 +13,12 @@ function Menu:Load()
     getgenv().AutoMaterial = false
     getgenv().TeleportOrbs = false
     getgenv().OrbHitboxExpand = false
+    getgenv().AutoCollectOrb = false
     getgenv().AutoUseLol = false
     getgenv().ActiveSkill = nil
     getgenv().UseWaitInterval = nil
     getgenv().WaitInterval = nil
     getgenv().MaterialString = nil
-    getgenv().AutoCollectOrb = nil
 
     self.Library = Library
     self.Window = Library:CreateWindow({
