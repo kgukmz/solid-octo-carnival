@@ -50,8 +50,11 @@ function Removals:RemoveKillBricks(Value)
         "Lava";
     }
 
-    for i, Object in next, workspace.Map:GetChildren() do
+    for i, Object in next, workspace.Map:GetDescendants() do
         if (table.find(BrickNames, Object.Name)) then
+            continue
+        end
+        if (Object.ClassName ~= "Part") then
             continue
         end
 
