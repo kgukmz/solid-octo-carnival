@@ -171,9 +171,18 @@ function Automation:TeleportOrbs()
 
     local HumanoidRootPart = Character.HumanoidRootPart
 
-    local CombatFolder = workspace:WaitForChild("CombatFolder", true)
-    local PlayerFolder = CombatFolder:WaitForChild(LocalPlayer.Name, true)
+    local CombatFolder = workspace:FindFirstChild("CombatFolder")
+
+    if (CombatFolder == nil) then
+        return
+    end
+
+    local PlayerFolder = CombatFolder:FindFirstChild(LocalPlayer.Name)
     
+    if (PlayerFolder == nil) then
+        return
+    end
+
     local FolderContents = PlayerFolder:GetChildren()
 
     for i, Orb in next, FolderContents do
