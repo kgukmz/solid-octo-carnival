@@ -43,6 +43,7 @@ function Menu:BindFunctions()
     Automation:AutoMaterial()
     Automation:OrbHitboxExpand()
     Automation:TeleportOrbs()
+    Automation:AutoCollectOrb()
 end
 
 return Menu
