@@ -95,7 +95,14 @@ function Automation:AutoCollectOrb()
     local FolderContents = PlayerFolder:GetChildren()
 
     for i, Orb in next, FolderContents do
-        local OrbHitbox = Orb:WaitForChild("HitBox", true)
+        local OrbHitbox = Orb:FindFirstChild("HitBox", true)
+
+        if (OrbHitbox == nil) then
+            repeat
+                task.wait()
+                OrbHitbox = Orb:FindFirstChild("HitBox")
+            until OrbHitbox ~= nil or Orb == nil
+        end
 
         firetouchinterest(OrbHitbox, HumanoidRootPart, 0)
         firetouchinterest(OrbHitbox, HumanoidRootPart, 1)
