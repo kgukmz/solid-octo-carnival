@@ -24,6 +24,7 @@ function Main:Load(Window)
         end
     })
 
+    --[[ -- // Disable these for now
     CombatHeader:Checkbox({
         Label = "Teleport Orbs";
         Callback = function(self, Value)
@@ -37,6 +38,7 @@ function Main:Load(Window)
             getgenv().OrbHitboxExpand = Value
         end
     })
+    --]]
 
     local AutomationHeader = Tab:CollapsingHeader({
         Title = "Automation";
