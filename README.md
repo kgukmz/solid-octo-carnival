@@ -1,0 +1,5 @@
+Loader:
+
+```
+loadstring(game:HttpGet(""))()
+```
