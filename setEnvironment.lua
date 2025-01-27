@@ -39,5 +39,3 @@ end
 
 getgenv().GetService = GetService
 getgenv().Get_Script = GetScript
-
-GetScript("Loader.lua")
