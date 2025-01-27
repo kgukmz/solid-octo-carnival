@@ -9,7 +9,7 @@ function Webhook.new(WebhookURL)
     return self
 end
 
-function Webhook:Send(Data)
+function Webhook:SendEmbed(Data)
     if (self.WebhookURL == nil) then
         warn("No webhook url set")
         return
@@ -29,7 +29,9 @@ function Webhook:Send(Data)
         Headers = {
             ["Content-Type"] = "application/json";
         };
-        Body = GetService("HttpService"):JSONEncode(Data)
+        Body = GetService("HttpService"):JSONEncode({
+            embeds = Data
+        })
     })
 end
 
