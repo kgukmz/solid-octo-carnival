@@ -14,16 +14,8 @@ function Webhook:SendEmbed(Data)
         warn("No webhook url set")
         return
     end
-    
-    local HttpRequest = nil
 
-    if (getgenv().http_request ~= nil) then
-        HttpRequest = getgenv().http_request
-    elseif(getgenv().request ~= nil) then
-        HttpRequest = getgenv().request
-    end
-
-    HttpRequest({
+    http_request({
         Url = self.WebhookURL;
         Method = "POST";
         Headers = {
